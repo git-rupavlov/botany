@@ -74,6 +74,26 @@ button { cursor: pointer; }
 .selectors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .selectors select { width: 100%; }
 
+.selector-panel { border-color: rgba(120,217,140,0.35); }
+.entity-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.entity-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+.entity-toggle input { width: 16px; height: 16px; accent-color: var(--accent); }
+.entity-toggle.active { color: var(--text); border-color: rgba(120,217,140,0.7); background: rgba(120,217,140,0.13); }
+.entity-toggle small { color: var(--muted); }
+.empty-state { color: var(--muted); padding: 16px; border: 1px dashed var(--line); border-radius: 14px; }
+
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
 .chip { border-radius: 999px; padding: 8px 11px; color: var(--muted); }
 .chip.active { background: rgba(120,217,140,0.16); color: var(--text); border-color: rgba(120,217,140,0.7); }
