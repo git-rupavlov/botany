@@ -1,11 +1,11 @@
-const BULGARIAN_CATALOG_URL = "data/catalog/bulgaria-heritage-tomatoes.json?v=20260705-2";
+const BULGARIAN_CATALOG_URL = "data/catalog/bulgaria-heritage-tomatoes.json?v=20260705-3";
 
 function waitForDatasetForBulgarianLayer() {
   return new Promise((resolve) => {
     let tries = 0;
     const timer = setInterval(() => {
       tries += 1;
-      if (window.state?.dataset?.entities?.length && window.state?.dataset?.metrics?.length) {
+      if (typeof state !== "undefined" && state?.dataset?.entities?.length && state?.dataset?.metrics?.length) {
         clearInterval(timer);
         resolve(true);
       }
@@ -18,12 +18,12 @@ function waitForDatasetForBulgarianLayer() {
 }
 
 function ensureBulgarianSelectorCategory() {
-  if (!Array.isArray(window.BOTANICAL_SECTIONS)) return;
+  if (typeof BOTANICAL_SECTIONS === "undefined" || !Array.isArray(BOTANICAL_SECTIONS)) return;
   if (!BOTANICAL_SECTIONS.some((section) => section.id === "bulgarian")) {
     BOTANICAL_SECTIONS.splice(2, 0, {
       id: "bulgarian",
       label: "Български",
-      description: "Български стабилни, дворни, стари и масови културни домати. Това е категория видове в селектора, не radar preset. Да, разликата има значение, колкото и UI-то да се прави на разсеяно."
+      description: "Български стабилни, дворни, стари и масови културни домати. Това е категория видове в селектора, не radar preset."
     });
   }
 }
