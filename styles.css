@@ -38,6 +38,7 @@ body {
 h1, h2, h3, p { margin-top: 0; }
 h1 { font-size: clamp(2.1rem, 4vw, 4.6rem); margin-bottom: 10px; letter-spacing: -0.05em; }
 h2 { margin-bottom: 10px; letter-spacing: -0.03em; }
+h3 { letter-spacing: -0.02em; }
 .subtitle, .hint, .muted { color: var(--muted); line-height: 1.6; }
 .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.13em; font-size: 0.74rem; font-weight: 700; margin-bottom: 8px; }
 
@@ -86,6 +87,30 @@ canvas { width: 100%; height: auto; display: block; }
 .card dl { display: grid; grid-template-columns: 1fr auto; gap: 7px 12px; margin: 0; color: var(--muted); }
 .card dd { margin: 0; color: var(--text); font-weight: 700; }
 
+.plant-profile-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+.plant-profile {
+  display: grid;
+  gap: 14px;
+  background: linear-gradient(180deg, rgba(120,217,140,0.08), rgba(255,255,255,0.015)), var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+}
+.plant-profile-header { display: grid; gap: 8px; }
+.plant-profile-title { display: flex; justify-content: space-between; gap: 14px; align-items: start; }
+.plant-profile-title h3 { margin-bottom: 3px; }
+.latin { color: var(--muted); font-style: italic; line-height: 1.4; }
+.badge { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; border: 1px solid rgba(120,217,140,0.45); color: var(--accent); border-radius: 999px; padding: 5px 9px; font-size: 0.78rem; font-weight: 700; }
+.profile-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.profile-stat { background: rgba(0,0,0,0.18); border: 1px solid rgba(255,255,255,0.055); border-radius: 12px; padding: 10px; }
+.profile-stat span { display: block; color: var(--muted); font-size: 0.78rem; margin-bottom: 4px; }
+.profile-stat strong { display: block; color: var(--text); font-size: 0.95rem; }
+.profile-block { display: grid; gap: 7px; }
+.profile-block h4 { margin: 0; color: var(--accent-2); font-size: 0.92rem; }
+.profile-list { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.55; }
+.profile-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.profile-tag { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--muted); background: rgba(255,255,255,0.03); font-size: 0.82rem; }
+
 .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 14px; }
 table { width: 100%; border-collapse: collapse; min-width: 980px; }
 th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -98,9 +123,14 @@ pre { max-height: 460px; overflow: auto; background: #0b0f0d; border: 1px solid 
 code { color: var(--accent-2); }
 footer { display: flex; justify-content: space-between; gap: 16px; color: var(--muted); border-top: 1px solid var(--line); padding: 20px 0 34px; }
 
+@media (max-width: 1180px) {
+  .plant-profile-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 980px) {
   .site-header, .hero, .section-title { flex-direction: column; align-items: stretch; }
   nav { justify-content: start; }
   .two-cols { grid-template-columns: 1fr; }
   .hero-card { min-width: unset; }
+  .profile-stats { grid-template-columns: 1fr; }
 }
