@@ -1,0 +1,61 @@
+{
+  "id": "bulgaria-heritage-tomatoes",
+  "title": "Bulgarian heritage and socialist-era tomato working catalog",
+  "updated": "2026-07-05",
+  "source": {
+    "name": "Bulgarian heritage tomato working catalog",
+    "usage": "Working layer for common Bulgarian garden tomatoes, socialist-era mass cultivars and older household-garden types. Exact historic claims must later be validated with Izk Maritsa, official variety lists, seed catalogs, herbarium/germplasm records and older agricultural literature."
+  },
+  "items": [
+    {
+      "id": "momini_gardi",
+      "name": "Момини гърди",
+      "section": "bulgaria-heritage-garden",
+      "latin": "Solanum lycopersicum, Bulgarian folk pink ribbed/pear-like type",
+      "status": "folk garden / local name type",
+      "retailFacts": ["стар градински тип по народно име", "ценен основно за вкус и форма", "по-скоро дворна линия отколкото стандартизиран промишлен сорт"],
+      "scores": {"flavor": 10, "market_value": 7, "breeding_value": 7, "rootstock_value": 4, "fruit_size": 8, "harvest_ease": 8, "availability": 4, "bulgarian_heritage_value": 10, "socialist_mass_value": 3, "household_garden_value": 10, "seed_saving_value": 8, "local_adaptation": 8},
+      "raw": {"fruit_color": "pink/red-pink", "fruit_shape": "folk ribbed/pear-like", "source_quality": "folk/common garden knowledge, evidence 1-2/5"}
+    },
+    {
+      "id": "stara_rozova_gradinska_linia",
+      "name": "Стара розова градинска линия",
+      "section": "bulgaria-heritage-garden",
+      "latin": "Solanum lycopersicum, Bulgarian local pink garden type",
+      "status": "local household garden type",
+      "retailFacts": ["общ стар розов дворен тип", "поддържан чрез собствени семена", "силен вкус, променлива форма и размер"],
+      "scores": {"flavor": 10, "market_value": 7, "breeding_value": 7, "rootstock_value": 4, "fruit_size": 9, "harvest_ease": 8, "availability": 5, "bulgarian_heritage_value": 10, "socialist_mass_value": 4, "household_garden_value": 10, "seed_saving_value": 9, "local_adaptation": 8},
+      "raw": {"fruit_color": "pink", "fruit_weight": "200-500+ g", "source_quality": "household garden type, evidence 1-2/5"}
+    },
+    {
+      "id": "cherven_gradinski_star_tip",
+      "name": "Червен градински стар тип",
+      "section": "bulgaria-heritage-garden",
+      "latin": "Solanum lycopersicum, Bulgarian red household garden type",
+      "status": "local red household garden type",
+      "retailFacts": ["стар червен дворен тип", "универсален за салата и буркани", "по-лесен за семесъбиране от F1"],
+      "scores": {"flavor": 8, "market_value": 7, "breeding_value": 6, "rootstock_value": 4, "fruit_size": 6, "harvest_ease": 8, "availability": 6, "bulgarian_heritage_value": 9, "socialist_mass_value": 6, "household_garden_value": 9, "seed_saving_value": 9, "local_adaptation": 8},
+      "raw": {"fruit_color": "red", "fruit_weight": "80-180 g", "source_quality": "household garden type, evidence 1-2/5"}
+    },
+    {
+      "id": "konserven_polski_tip",
+      "name": "Консервен полски тип",
+      "section": "bulgaria-socialist-mass",
+      "latin": "Solanum lycopersicum, red processing field type",
+      "status": "mass field/processing type",
+      "retailFacts": ["масов червен тип за преработка", "подходящ за буркани, сок, лютеница и полско производство", "по-важен е добивът и еднородността от гурме вкуса"],
+      "scores": {"flavor": 7, "market_value": 8, "breeding_value": 6, "rootstock_value": 4, "fruit_size": 5, "harvest_ease": 8, "availability": 7, "bulgarian_heritage_value": 8, "socialist_mass_value": 9, "household_garden_value": 7, "seed_saving_value": 8, "local_adaptation": 8},
+      "raw": {"fruit_color": "red", "use": "processing", "source_quality": "mass production type, evidence 2/5"}
+    },
+    {
+      "id": "edropolden_rozov_pazarenski_tip",
+      "name": "Едроплоден розов пазарен тип",
+      "section": "bulgaria-heritage-garden",
+      "latin": "Solanum lycopersicum, large Bulgarian pink market/garden type",
+      "status": "large pink garden/market type",
+      "retailFacts": ["едър розов тип за пазар и двор", "висока вкусово-пазарна стойност", "иска добра вода, колове и грижа"],
+      "scores": {"flavor": 10, "market_value": 9, "breeding_value": 6, "rootstock_value": 4, "fruit_size": 10, "harvest_ease": 9, "availability": 6, "bulgarian_heritage_value": 9, "socialist_mass_value": 5, "household_garden_value": 9, "seed_saving_value": 8, "local_adaptation": 7},
+      "raw": {"fruit_color": "pink", "fruit_weight": "300-700+ g", "source_quality": "common market/garden type, evidence 2/5"}
+    }
+  ]
+}
