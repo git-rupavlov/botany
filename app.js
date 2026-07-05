@@ -1,4 +1,4 @@
-const DATASET_URL = "data/comparisons/tomatoes-wild-cherry-rozova-mechta.json?v=20260705-2";
+const DATASET_URL = "data/comparisons/tomatoes-wild-cherry-rozova-mechta.json?v=20260705-4";
 
 const RADAR_PRESETS = {
   botanical: {
@@ -35,7 +35,8 @@ const RADAR_PRESETS = {
       "disease_resistance",
       "fungal_resistance",
       "fruiting_duration",
-      "greenhouse_value"
+      "greenhouse_value",
+      "maintenance_ease"
     ]
   },
   hobbyOrganic: {
@@ -51,6 +52,9 @@ const RADAR_PRESETS = {
       "disease_resistance",
       "drought_tolerance",
       "low_soil_fertility_tolerance",
+      "container_resilience",
+      "compact_space_efficiency",
+      "maintenance_ease",
       "root_power",
       "fruiting_duration",
       "perennial_value",
