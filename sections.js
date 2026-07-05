@@ -1,11 +1,12 @@
 const CATALOG_URLS = [
-  "data/catalog/semenaonline-tomatoes.json?v=20260705-4",
-  "data/catalog/bulgaria-cultivated-tomatoes.json?v=20260705-3"
+  "data/catalog/semenaonline-tomatoes.json?v=20260705-5",
+  "data/catalog/bulgaria-cultivated-tomatoes.json?v=20260705-4"
 ];
 
 const BOTANICAL_SECTIONS = [
   { id: "wild", label: "Диви", description: "Реални диви видове или линии с ясно посочен див вид." },
   { id: "semi-wild", label: "Полу-Диви", description: "Дребноплодни, касисови или примитивни линии без сигурен чист див статус." },
+  { id: "bulgarian", label: "Български", description: "Български стабилни, дворни, стари и масови културни домати. Това е допълнителна категория, не премества вида от основната му ботаническа група." },
   { id: "cultivated-stable", label: "Култивирани (стабилни)", description: "Утвърдени сортове и стабилни културни линии." },
   { id: "cultivated-f1", label: "Култивирани (хибрид F1)", description: "F1 хибриди." },
   { id: "cultivated-gmo", label: "Култивирани (ГМО)", description: "Няма добавени линии." },
@@ -15,15 +16,24 @@ const BOTANICAL_SECTIONS = [
 const CONSUMER_METRICS = [
   { id: "availability", label: "Наличност", shortLabel: "Наличност", group: "Консуматор", timeline: false, note: "Колко лесно може да се намери като семена/разсад/плод в България или масовия пазар." },
   { id: "phytonutrient_profile", label: "Пълен профил вещества", shortLabel: "Профил вещества", group: "Консуматор", timeline: false, note: "Ширина на хранителния профил: витамини, минерали, каротеноиди, ликопен, антиоксиданти и други полезни вещества." },
-  { id: "body_benefit_per_100g", label: "Полза за тялото / 100 g", shortLabel: "Полза / 100g", group: "Консуматор", timeline: false, note: "Оценка на полезността на 100 g плод на база плътност на полезни вещества. Работен индекс, не медицинско твърдение." }
+  { id: "body_benefit_per_100g", label: "Полза за тялото / 100 g", shortLabel: "Полза / 100g", group: "Консуматор", timeline: false, note: "Работен индекс на база полезни вещества на 100 g плод, не медицинско твърдение." }
 ];
 
 const SECTION_ORDER = BOTANICAL_SECTIONS.map((section) => section.id);
 const SKIP_ITEM_IDS = new Set(["bio_rote_murmel_pimpinellifolium", "sweet_pea_pimpinellifolium_semenaonline", "vilma_semenaonline"]);
 
-function sectionLabel(sectionId) { return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.label || sectionId; }
-function sectionDescription(sectionId) { return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.description || ""; }
-function sectionRank(sectionId) { const index = SECTION_ORDER.indexOf(sectionId); return index === -1 ? 99 : index; }
+function sectionLabel(sectionId) {
+  return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.label || sectionId;
+}
+
+function sectionDescription(sectionId) {
+  return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.description || "";
+}
+
+function sectionRank(sectionId) {
+  const index = SECTION_ORDER.indexOf(sectionId);
+  return index === -1 ? 99 : index;
+}
 
 function ensureConsumerMetrics() {
   const existing = new Set(state.dataset.metrics.map((metric) => metric.id));
@@ -42,8 +52,33 @@ function classifyText(text) {
   return "cultivated-stable";
 }
 
-function classifyItem(item) { return classifyText(`${item.id || ""} ${item.name || ""} ${item.latin || ""} ${item.status || ""} ${item.section || ""}`); }
-function classifyEntity(entity) { return classifyText(`${entity.id || ""} ${entity.name || ""} ${entity.latin || ""} ${entity.role || ""} ${entity.profile?.category || ""}`); }
+function classifyItem(item) {
+  return classifyText(`${item.id || ""} ${item.name || ""} ${item.latin || ""} ${item.status || ""} ${item.section || ""}`);
+}
+
+function classifyEntity(entity) {
+  return classifyText(`${entity.id || ""} ${entity.name || ""} ${entity.latin || ""} ${entity.role || ""} ${entity.profile?.category || ""}`);
+}
+
+function getEntitySections(entity) {
+  const sections = new Set(entity.sections || []);
+  sections.add(entity.section || classifyEntity(entity));
+  return [...sections];
+}
+
+function setPrimarySection(entity, section) {
+  entity.section = section;
+  entity.sections = getEntitySections(entity);
+  entity.sections.unshift(section);
+  entity.sections = [...new Set(entity.sections)];
+  return entity;
+}
+
+function addEntitySection(entity, section) {
+  entity.sections = getEntitySections(entity);
+  if (!entity.sections.includes(section)) entity.sections.push(section);
+  return entity;
+}
 
 function hasText(entity, words) {
   const value = `${entity.id || ""} ${entity.name || ""} ${entity.latin || ""} ${entity.role || ""} ${entity.summary || ""}`.toLowerCase();
@@ -53,6 +88,7 @@ function hasText(entity, words) {
 function consumerScore(entity, metricId) {
   const section = entity.section || classifyEntity(entity);
   if (metricId === "availability") {
+    if (getEntitySections(entity).includes("bulgarian")) return 7;
     if (section === "cultivated-stable") return 8;
     if (section === "cultivated-f1") return 7;
     if (section === "semi-wild") return 5;
@@ -110,38 +146,6 @@ function ensureScores(entity) {
   return entity;
 }
 
-function normalizeCatalogItem(item) {
-  const section = classifyItem(item);
-  const facts = item.retailFacts || [];
-  const entity = {
-    id: item.id,
-    name: item.name,
-    section,
-    originalSection: item.section,
-    latin: item.latin,
-    role: item.status || sectionLabel(section),
-    summary: facts.join("; "),
-    fruitWeight: item.raw?.fruit_weight || item.raw?.fruit_size || "n/a",
-    yieldPerPlant: item.raw?.yield_per_plant || "n/a",
-    yieldPerSquareMeter: item.raw?.yield_per_square_meter || "n/a",
-    sugarPer100g: item.raw?.sugar_content || "n/a",
-    sourceUrl: item.sourceUrl,
-    profile: {
-      category: sectionLabel(section),
-      growthHabit: item.raw?.plant_height ? `reported height: ${item.raw.plant_height}` : sectionLabel(section),
-      overview: `${item.name}: ${facts.join("; ")}.`,
-      strengths: buildStrengths(item, section),
-      weaknesses: buildWeaknesses(item, section),
-      bestUse: buildBestUse(section),
-      tags: [section, item.status || "catalog"]
-    },
-    scores: item.scores || {},
-    raw: item.raw || {},
-    evidence: { retail: 2, scientific: item.latin?.includes("pimpinellifolium") ? 3 : 1 }
-  };
-  return ensureScores(entity);
-}
-
 function buildStrengths(item, section) {
   const facts = item.retailFacts || [];
   const out = [];
@@ -170,7 +174,42 @@ function buildBestUse(section) {
   return ["само при конкретна доказана линия"];
 }
 
-function keepCatalogItem(item) { return !SKIP_ITEM_IDS.has(item.id) && !item.aliasOf; }
+function normalizeCatalogItem(item) {
+  const section = classifyItem(item);
+  const facts = item.retailFacts || [];
+  const entity = {
+    id: item.id,
+    name: item.name,
+    section,
+    sections: [section],
+    originalSection: item.section,
+    latin: item.latin,
+    role: item.status || sectionLabel(section),
+    summary: facts.join("; "),
+    fruitWeight: item.raw?.fruit_weight || item.raw?.fruit_size || "n/a",
+    yieldPerPlant: item.raw?.yield_per_plant || "n/a",
+    yieldPerSquareMeter: item.raw?.yield_per_square_meter || "n/a",
+    sugarPer100g: item.raw?.sugar_content || "n/a",
+    sourceUrl: item.sourceUrl,
+    profile: {
+      category: sectionLabel(section),
+      growthHabit: item.raw?.plant_height ? `reported height: ${item.raw.plant_height}` : sectionLabel(section),
+      overview: `${item.name}: ${facts.join("; ")}.`,
+      strengths: buildStrengths(item, section),
+      weaknesses: buildWeaknesses(item, section),
+      bestUse: buildBestUse(section),
+      tags: [section, item.status || "catalog"]
+    },
+    scores: item.scores || {},
+    raw: item.raw || {},
+    evidence: { retail: 2, scientific: item.latin?.includes("pimpinellifolium") ? 3 : 1 }
+  };
+  return ensureScores(entity);
+}
+
+function keepCatalogItem(item) {
+  return !SKIP_ITEM_IDS.has(item.id) && !item.aliasOf;
+}
 
 async function waitForBaseDataset() {
   for (let i = 0; i < 80; i += 1) {
@@ -203,7 +242,7 @@ async function loadCatalogLayer() {
   state.catalogSections = BOTANICAL_SECTIONS;
 
   state.dataset.entities.forEach((entity) => {
-    entity.section = classifyEntity(entity);
+    setPrimarySection(entity, classifyEntity(entity));
     ensureScores(entity);
   });
 
@@ -232,9 +271,10 @@ renderEntityControls = function renderGroupedEntityControls() {
   const groups = new Map();
   BOTANICAL_SECTIONS.forEach((section) => groups.set(section.id, []));
   state.dataset.entities.forEach((entity) => {
-    const section = entity.section || classifyEntity(entity);
-    if (!groups.has(section)) groups.set(section, []);
-    groups.get(section).push(entity);
+    getEntitySections(entity).forEach((section) => {
+      if (!groups.has(section)) groups.set(section, []);
+      groups.get(section).push(entity);
+    });
   });
 
   [...groups.entries()].sort(([left], [right]) => sectionRank(left) - sectionRank(right) || left.localeCompare(right)).forEach(([sectionId, entities]) => {
@@ -251,7 +291,7 @@ renderEntityControls = function renderGroupedEntityControls() {
       empty.textContent = "Няма добавени видове в тази категория.";
       items.appendChild(empty);
     } else {
-      entities.forEach((entity) => items.appendChild(makeEntityToggle(entity)));
+      entities.forEach((entity) => items.appendChild(makeEntityToggle(entity, sectionId)));
     }
     section.querySelector(".section-toggle").addEventListener("click", () => {
       if (entities.length === 0) return;
@@ -268,14 +308,14 @@ renderEntityControls = function renderGroupedEntityControls() {
   });
 };
 
-function makeEntityToggle(entity) {
+function makeEntityToggle(entity, displaySection) {
   const isActive = state.selectedEntityIds.includes(entity.id);
   const label = document.createElement("label");
   label.className = `entity-toggle ${isActive ? "active" : ""}`;
   label.innerHTML = `
     <input type="checkbox" value="${entity.id}" ${isActive ? "checked" : ""} />
     <span>${entity.name}</span>
-    <small>${sectionLabel(entity.section || classifyEntity(entity))}</small>
+    <small>${sectionLabel(displaySection || entity.section || classifyEntity(entity))}</small>
   `;
   label.querySelector("input").addEventListener("change", (event) => {
     const next = new Set(state.selectedEntityIds);
