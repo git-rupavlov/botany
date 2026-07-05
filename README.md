@@ -14,6 +14,7 @@ The first dataset compares:
 
 Visualizations included:
 
+- Plant profile cards
 - Radar / spider chart
 - Detailed comparison table
 - Time-series chart
@@ -76,7 +77,23 @@ Use the same model:
   "updated": "2026-07-05",
   "scale": "0-10 comparative score unless raw value is provided",
   "defaultRadarAxes": ["metric_id_1", "metric_id_2"],
-  "entities": [],
+  "entities": [
+    {
+      "id": "plant_id",
+      "name": "Plant name",
+      "profile": {
+        "category": "type",
+        "growthHabit": "growth habit",
+        "overview": "short description",
+        "strengths": [],
+        "weaknesses": [],
+        "bestUse": [],
+        "tags": []
+      },
+      "scores": {},
+      "raw": {}
+    }
+  ],
   "metrics": [],
   "timeline": {
     "labels": [],
@@ -92,6 +109,7 @@ Then change `DATASET_URL` in `app.js` or later add a dataset selector.
 - Use normalized 0-10 scores for visual comparison.
 - Keep raw values where they matter: kg, g/100 g, mg/100 g, plant height, root depth.
 - Add notes when values are estimates.
+- Store plant profile fields next to the entity so the profile and charts stay in sync.
 - Commit changes instead of overwriting history.
 
 ## Next useful improvements
