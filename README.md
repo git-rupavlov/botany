@@ -14,13 +14,22 @@ The first dataset compares:
 
 Visualizations included:
 
+- Entity selection for filtering compared plants
 - Plant profile cards
-- Radar / spider chart
+- Radar / spider chart with presets
 - Detailed comparison table
 - Time-series chart
 - Garden quadrant chart
 - JSON preview
 - CSV export
+
+## Radar presets
+
+Current radar presets:
+
+- Botanical / Ботанически: resistance, climate tolerance, root system, vigor, regeneration, perennial value, breeding value.
+- Commercial mass industry / Стопански - масова индустрия: yield, harvest efficiency, market value, cracking resistance, disease resistance, fruiting duration, greenhouse value.
+- Commercial organic/hobby / Стопански - био/любителско: flavor, sugar, vitamins, antioxidants, minerals, resilience, root power, fruiting duration, perennial and greenhouse value.
 
 ## File structure
 
