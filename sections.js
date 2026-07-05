@@ -1,6 +1,7 @@
 const CATALOG_URLS = [
   "data/catalog/semenaonline-tomatoes.json?v=20260705-5",
-  "data/catalog/bulgaria-cultivated-tomatoes.json?v=20260705-4"
+  "data/catalog/bulgaria-cultivated-tomatoes.json?v=20260705-4",
+  "data/catalog/processing-tomatoes.json?v=20260706-1"
 ];
 
 const BOTANICAL_SECTIONS = [
