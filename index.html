@@ -48,36 +48,24 @@
           <button id="clearEntitySelection" type="button">Изчисти</button>
         </div>
       </div>
-      <p class="hint">Маркираните видове участват във всички карти, таблици и диаграми. Секциите разделят търговски каталог, диви/касисови линии и референтни културни домати.</p>
+      <p class="hint">Маркираните видове участват във всички карти, таблици и диаграми. Секциите разделят ботанически реални групи, не маркетингови етикети.</p>
       <div id="entityControls" class="entity-controls"></div>
     </section>
 
     <section id="plant-profiles" class="panel">
-      <div class="section-title">
-        <div>
-          <p class="eyebrow">Plant profiles</p>
-          <h2>Профили на растенията</h2>
-        </div>
-      </div>
+      <div class="section-title"><div><p class="eyebrow">Plant profiles</p><h2>Профили на растенията</h2></div></div>
       <p class="hint">Кратки профили за конкретните линии в сравнението.</p>
       <div id="plantProfiles" class="plant-profile-grid"></div>
     </section>
 
     <section id="compare" class="grid two-cols">
       <article class="panel">
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">Radar / spider chart</p>
-            <h2>Радиална диаграма</h2>
-          </div>
-          <button id="resetAxes" type="button">Reset</button>
-        </div>
+        <div class="section-title"><div><p class="eyebrow">Radar / spider chart</p><h2>Радиална диаграма</h2></div><button id="resetAxes" type="button">Reset</button></div>
         <p class="hint">Избери preset или ръчно маркирай оси. Всички стойности са нормализирани 0-10.</p>
         <div id="radarPresets" class="preset-controls"></div>
         <div id="axisControls" class="chips"></div>
         <div class="chart-wrap"><canvas id="radarCanvas" width="760" height="620"></canvas></div>
       </article>
-
       <article class="panel">
         <div class="section-title"><div><p class="eyebrow">Quick profiles</p><h2>Бързи карти</h2></div></div>
         <div id="profiles" class="cards"></div>
@@ -85,23 +73,13 @@
     </section>
 
     <section id="table" class="panel">
-      <div class="section-title">
-        <div><p class="eyebrow">Sortable table</p><h2>Подробна таблица</h2></div>
-        <label class="search-label">Филтър <input id="metricFilter" type="search" placeholder="болести, корен, захар..." /></label>
-      </div>
+      <div class="section-title"><div><p class="eyebrow">Sortable table</p><h2>Подробна таблица</h2></div><label class="search-label">Филтър <input id="metricFilter" type="search" placeholder="болести, корен, захар..." /></label></div>
       <div class="table-wrap"><table id="comparisonTable"></table></div>
     </section>
 
     <section id="timeline" class="grid two-cols">
-      <article class="panel">
-        <div class="section-title"><div><p class="eyebrow">Time series</p><h2>Развитие във времето</h2></div><select id="timelineMetric"></select></div>
-        <div class="chart-wrap short"><canvas id="timelineCanvas" width="760" height="430"></canvas></div>
-      </article>
-      <article id="quadrant" class="panel">
-        <div class="section-title"><div><p class="eyebrow">Garden quadrant</p><h2>Гардънър квадрант</h2></div></div>
-        <div class="selectors"><label>X ос <select id="xMetric"></select></label><label>Y ос <select id="yMetric"></select></label></div>
-        <div class="chart-wrap short"><canvas id="quadrantCanvas" width="760" height="430"></canvas></div>
-      </article>
+      <article class="panel"><div class="section-title"><div><p class="eyebrow">Time series</p><h2>Развитие във времето</h2></div><select id="timelineMetric"></select></div><div class="chart-wrap short"><canvas id="timelineCanvas" width="760" height="430"></canvas></div></article>
+      <article id="quadrant" class="panel"><div class="section-title"><div><p class="eyebrow">Garden quadrant</p><h2>Гардънър квадрант</h2></div></div><div class="selectors"><label>X ос <select id="xMetric"></select></label><label>Y ос <select id="yMetric"></select></label></div><div class="chart-wrap short"><canvas id="quadrantCanvas" width="760" height="430"></canvas></div></article>
     </section>
 
     <section id="data" class="panel">
@@ -113,6 +91,7 @@
 
   <footer><span>Botany Lab</span><span>Static, versionable, local-friendly.</span></footer>
   <script src="app.js?v=20260705-4"></script>
-  <script src="sections.js?v=20260705-1"></script>
+  <script src="consumer-preset.js?v=20260705-1"></script>
+  <script src="sections.js?v=20260705-2"></script>
 </body>
 </html>
