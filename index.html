@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Botany Lab | Съпоставки и визуализации</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">nomadfarmer.tech / botany</p>
+      <h1>Botany Lab</h1>
+      <p class="subtitle">Минимална среда за исторически съпоставки: таблици, radar диаграми, времеви серии и квадранти.</p>
+    </div>
+    <nav>
+      <a href="#compare">Съпоставка</a>
+      <a href="#table">Таблица</a>
+      <a href="#timeline">Времеви серии</a>
+      <a href="#quadrant">Квадрант</a>
+      <a href="#data">Данни</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="panel hero">
+      <div>
+        <h2>Една база данни, много визуализации</h2>
+        <p>Вместо да произвеждаме PDF-и като бюрократична гъба след дъжд, данните се държат в JSON, а сайтът ги визуализира динамично.</p>
+      </div>
+      <div class="hero-card">
+        <strong id="datasetTitle">Зареждане...</strong>
+        <span id="datasetMeta"></span>
+      </div>
+    </section>
+
+    <section id="compare" class="grid two-cols">
+      <article class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Radar / spider chart</p>
+            <h2>Радиална диаграма</h2>
+          </div>
+          <button id="resetAxes" type="button">Reset</button>
+        </div>
+        <p class="hint">Избери оси. Всички стойности са нормализирани 0-10, за да не сравняваме корени с витамин C и после да се чудим защо математиката плаче.</p>
+        <div id="axisControls" class="chips"></div>
+        <div class="chart-wrap">
+          <canvas id="radarCanvas" width="760" height="620"></canvas>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Profiles</p>
+            <h2>Профили</h2>
+          </div>
+        </div>
+        <div id="profiles" class="cards"></div>
+      </article>
+    </section>
+
+    <section id="table" class="panel">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Sortable table</p>
+          <h2>Подробна таблица</h2>
+        </div>
+        <label class="search-label">Филтър <input id="metricFilter" type="search" placeholder="болести, корен, захар..." /></label>
+      </div>
+      <div class="table-wrap">
+        <table id="comparisonTable"></table>
+      </div>
+    </section>
+
+    <section id="timeline" class="grid two-cols">
+      <article class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Time series</p>
+            <h2>Развитие във времето</h2>
+          </div>
+          <select id="timelineMetric"></select>
+        </div>
+        <div class="chart-wrap short">
+          <canvas id="timelineCanvas" width="760" height="430"></canvas>
+        </div>
+      </article>
+
+      <article id="quadrant" class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Garden quadrant</p>
+            <h2>Гардънър квадрант</h2>
+          </div>
+        </div>
+        <div class="selectors">
+          <label>X ос <select id="xMetric"></select></label>
+          <label>Y ос <select id="yMetric"></select></label>
+        </div>
+        <div class="chart-wrap short">
+          <canvas id="quadrantCanvas" width="760" height="430"></canvas>
+        </div>
+      </article>
+    </section>
+
+    <section id="data" class="panel">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Data first</p>
+          <h2>Източник на данните</h2>
+        </div>
+        <div class="actions">
+          <button id="copyJson" type="button">Copy JSON</button>
+          <button id="downloadCsv" type="button">Download CSV</button>
+        </div>
+      </div>
+      <p class="hint">Добавяш нова тема като нов JSON файл в <code>data/comparisons/</code>. Сайтът е нарочно прост: HTML, CSS, JS, без build система, защото не всяка таблица заслужава Kubernetes.</p>
+      <pre id="rawData"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <span>Botany Lab</span>
+    <span>Static, versionable, cheap to host, hard to lose.</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
