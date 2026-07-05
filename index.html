@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Botany Lab | Съпоставки и визуализации</title>
-  <link rel="stylesheet" href="styles.css?v=20260705-3" />
+  <title>Botany Lab</title>
+  <link rel="stylesheet" href="styles.css?v=20260705-4" />
+  <link rel="stylesheet" href="selector-groups.css?v=20260705-1" />
 </head>
 <body>
   <header class="site-header">
     <div>
       <p class="eyebrow">nomadfarmer.tech / botany</p>
       <h1>Botany Lab</h1>
-      <p class="subtitle">Минимална среда за исторически съпоставки: таблици, radar диаграми, времеви серии и квадранти.</p>
+      <p class="subtitle">Среда за исторически съпоставки: таблици, radar диаграми, времеви серии и квадранти.</p>
     </div>
     <nav>
       <a href="#selector">Избор</a>
@@ -28,7 +29,7 @@
     <section class="panel hero">
       <div>
         <h2>Една база данни, много визуализации</h2>
-        <p>Вместо да произвеждаме PDF-и като бюрократична гъба след дъжд, данните се държат в JSON, а сайтът ги визуализира динамично.</p>
+        <p>Данните се държат в JSON, а сайтът ги визуализира динамично.</p>
       </div>
       <div class="hero-card">
         <strong id="datasetTitle">Зареждане...</strong>
@@ -47,7 +48,7 @@
           <button id="clearEntitySelection" type="button">Изчисти</button>
         </div>
       </div>
-      <p class="hint">Маркираните видове участват във всички карти, таблици и диаграми. Минимум един вид трябва да остане избран.</p>
+      <p class="hint">Маркираните видове участват във всички карти, таблици и диаграми. Секциите разделят търговски каталог, диви/касисови линии и референтни културни домати.</p>
       <div id="entityControls" class="entity-controls"></div>
     </section>
 
@@ -58,7 +59,7 @@
           <h2>Профили на растенията</h2>
         </div>
       </div>
-      <p class="hint">Кратки профили за конкретните линии в сравнението: роля, навик на растеж, условия, силни страни, слаби страни и практическа употреба.</p>
+      <p class="hint">Кратки профили за конкретните линии в сравнението.</p>
       <div id="plantProfiles" class="plant-profile-grid"></div>
     </section>
 
@@ -74,87 +75,44 @@
         <p class="hint">Избери preset или ръчно маркирай оси. Всички стойности са нормализирани 0-10.</p>
         <div id="radarPresets" class="preset-controls"></div>
         <div id="axisControls" class="chips"></div>
-        <div class="chart-wrap">
-          <canvas id="radarCanvas" width="760" height="620"></canvas>
-        </div>
+        <div class="chart-wrap"><canvas id="radarCanvas" width="760" height="620"></canvas></div>
       </article>
 
       <article class="panel">
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">Quick profiles</p>
-            <h2>Бързи карти</h2>
-          </div>
-        </div>
+        <div class="section-title"><div><p class="eyebrow">Quick profiles</p><h2>Бързи карти</h2></div></div>
         <div id="profiles" class="cards"></div>
       </article>
     </section>
 
     <section id="table" class="panel">
       <div class="section-title">
-        <div>
-          <p class="eyebrow">Sortable table</p>
-          <h2>Подробна таблица</h2>
-        </div>
+        <div><p class="eyebrow">Sortable table</p><h2>Подробна таблица</h2></div>
         <label class="search-label">Филтър <input id="metricFilter" type="search" placeholder="болести, корен, захар..." /></label>
       </div>
-      <div class="table-wrap">
-        <table id="comparisonTable"></table>
-      </div>
+      <div class="table-wrap"><table id="comparisonTable"></table></div>
     </section>
 
     <section id="timeline" class="grid two-cols">
       <article class="panel">
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">Time series</p>
-            <h2>Развитие във времето</h2>
-          </div>
-          <select id="timelineMetric"></select>
-        </div>
-        <div class="chart-wrap short">
-          <canvas id="timelineCanvas" width="760" height="430"></canvas>
-        </div>
+        <div class="section-title"><div><p class="eyebrow">Time series</p><h2>Развитие във времето</h2></div><select id="timelineMetric"></select></div>
+        <div class="chart-wrap short"><canvas id="timelineCanvas" width="760" height="430"></canvas></div>
       </article>
-
       <article id="quadrant" class="panel">
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">Garden quadrant</p>
-            <h2>Гардънър квадрант</h2>
-          </div>
-        </div>
-        <div class="selectors">
-          <label>X ос <select id="xMetric"></select></label>
-          <label>Y ос <select id="yMetric"></select></label>
-        </div>
-        <div class="chart-wrap short">
-          <canvas id="quadrantCanvas" width="760" height="430"></canvas>
-        </div>
+        <div class="section-title"><div><p class="eyebrow">Garden quadrant</p><h2>Гардънър квадрант</h2></div></div>
+        <div class="selectors"><label>X ос <select id="xMetric"></select></label><label>Y ос <select id="yMetric"></select></label></div>
+        <div class="chart-wrap short"><canvas id="quadrantCanvas" width="760" height="430"></canvas></div>
       </article>
     </section>
 
     <section id="data" class="panel">
-      <div class="section-title">
-        <div>
-          <p class="eyebrow">Data first</p>
-          <h2>Източник на данните</h2>
-        </div>
-        <div class="actions">
-          <button id="copyJson" type="button">Copy JSON</button>
-          <button id="downloadCsv" type="button">Download CSV</button>
-        </div>
-      </div>
-      <p class="hint">Добавяш нова тема като нов JSON файл в <code>data/comparisons/</code>. Сайтът е нарочно прост: HTML, CSS, JS, без build система, защото не всяка таблица заслужава Kubernetes.</p>
+      <div class="section-title"><div><p class="eyebrow">Data first</p><h2>Източник на данните</h2></div><div class="actions"><button id="copyJson" type="button">Copy JSON</button><button id="downloadCsv" type="button">Download CSV</button></div></div>
+      <p class="hint">Основните данни са в <code>data/comparisons/</code>, а търговските/научните слоеве са в <code>data/catalog/</code>.</p>
       <pre id="rawData"></pre>
     </section>
   </main>
 
-  <footer>
-    <span>Botany Lab</span>
-    <span>Static, versionable, cheap to host, hard to lose.</span>
-  </footer>
-
-  <script src="app.js?v=20260705-3"></script>
+  <footer><span>Botany Lab</span><span>Static, versionable, local-friendly.</span></footer>
+  <script src="app.js?v=20260705-4"></script>
+  <script src="sections.js?v=20260705-1"></script>
 </body>
 </html>
