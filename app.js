@@ -270,6 +270,62 @@ function renderAxisControls() {
   });
 }
 
+function renderPlantProfiles() {
+  const container = $("#plantProfiles");
+  if (!container) return;
+  container.innerHTML = "";
+
+  state.dataset.entities.forEach((entity) => {
+    const profile = entity.profile || {};
+    const article = document.createElement("article");
+    article.className = "plant-profile";
+    article.innerHTML = `
+      <header class="plant-profile-header">
+        <div class="plant-profile-title">
+          <div>
+            <h3>${entity.name}</h3>
+            <div class="latin">${entity.latin}</div>
+          </div>
+          <span class="badge">${profile.category || "Tomato"}</span>
+        </div>
+        <p class="muted">${profile.overview || entity.summary}</p>
+      </header>
+
+      <div class="profile-stats">
+        ${renderProfileStat("Растеж", profile.growthHabit)}
+        ${renderProfileStat("Плод", entity.fruitWeight)}
+        ${renderProfileStat("Добив / растение", entity.yieldPerPlant)}
+        ${renderProfileStat("Захари", entity.sugarPer100g)}
+      </div>
+
+      ${renderProfileBlock("Силни страни", profile.strengths)}
+      ${renderProfileBlock("Слаби страни", profile.weaknesses)}
+      ${renderProfileBlock("Най-добра употреба", profile.bestUse)}
+
+      <div class="profile-tags">
+        ${(profile.tags || []).map((tag) => `<span class="profile-tag">${tag}</span>`).join("")}
+      </div>
+    `;
+    container.appendChild(article);
+  });
+}
+
+function renderProfileStat(label, value) {
+  return `<div class="profile-stat"><span>${label}</span><strong>${value || "n/a"}</strong></div>`;
+}
+
+function renderProfileBlock(title, items) {
+  if (!items || items.length === 0) return "";
+  return `
+    <section class="profile-block">
+      <h4>${title}</h4>
+      <ul class="profile-list">
+        ${items.map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
 function renderProfiles() {
   const container = $("#profiles");
   container.innerHTML = "";
@@ -373,6 +429,7 @@ async function init() {
   $("#datasetMeta").textContent = `${state.dataset.entities.length} вида · ${state.dataset.metrics.length} показателя · ${state.dataset.updated}`;
   $("#rawData").textContent = JSON.stringify(state.dataset, null, 2);
 
+  renderPlantProfiles();
   renderAxisControls();
   renderProfiles();
   renderTable();
