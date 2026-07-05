@@ -14,6 +14,7 @@
       <p class="subtitle">Минимална среда за исторически съпоставки: таблици, radar диаграми, времеви серии и квадранти.</p>
     </div>
     <nav>
+      <a href="#selector">Избор</a>
       <a href="#plant-profiles">Профили</a>
       <a href="#compare">Съпоставка</a>
       <a href="#table">Таблица</a>
@@ -33,6 +34,21 @@
         <strong id="datasetTitle">Зареждане...</strong>
         <span id="datasetMeta"></span>
       </div>
+    </section>
+
+    <section id="selector" class="panel selector-panel">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Comparison scope</p>
+          <h2>Избор на видове за съпоставка</h2>
+        </div>
+        <div class="actions">
+          <button id="selectAllEntities" type="button">Всички</button>
+          <button id="clearEntitySelection" type="button">Изчисти</button>
+        </div>
+      </div>
+      <p class="hint">Маркираните видове участват във всички карти, таблици и диаграми. Минимум един вид трябва да остане избран.</p>
+      <div id="entityControls" class="entity-controls"></div>
     </section>
 
     <section id="plant-profiles" class="panel">
