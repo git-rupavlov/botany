@@ -1,0 +1,173 @@
+{
+  "id": "semenaonline-tomatoes",
+  "title": "SemenaOnline tomato catalog",
+  "updated": "2026-07-05",
+  "source": {
+    "name": "SemenaOnline.bg",
+    "url": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati",
+    "wildTomatoesUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+    "usage": "Retail source: availability, product names, rough morphology, fruit color, fruit size, container suitability. Not used as a primary scientific source for disease resistance or genetics. Because apparently separating marketing from data is still a radical act."
+  },
+  "scientificSourcePolicy": {
+    "preferredSources": [
+      "USDA ARS / GRIN / National Plant Germplasm System",
+      "NARO Japan",
+      "World Vegetable Center",
+      "University of California, Davis",
+      "Cornell University",
+      "University of Florida",
+      "Wageningen University & Research",
+      "Royal Botanic Gardens, Kew",
+      "Peer-reviewed publications"
+    ],
+    "evidenceScale": {
+      "5": "Measured / accession-backed / multiple primary scientific sources",
+      "4": "Several scientific publications or reputable germplasm sources",
+      "3": "One scientific source or strong institutional source",
+      "2": "Retail morphology plus general botanical knowledge",
+      "1": "Estimate / placeholder pending source"
+    }
+  },
+  "sections": [
+    {
+      "id": "wild-currant-semenaonline",
+      "label": "SemenaOnline / Диви и касисови домати",
+      "description": "Products listed under the SemenaOnline 'Диви домати' category. The page describes these as easy to grow, sweet, resilient, and resistant to fungal diseases, but this is treated as retail description, not proof-grade science."
+    },
+    {
+      "id": "compact-balcony-semenaonline",
+      "label": "SemenaOnline / Компактни балконски и мини F1",
+      "description": "Very compact Solanum lycopersicum products from the same wild-tomato retail category: Minirotus F1, Minigelbus F1, Minipeelus F1, Vilma. These are compact cultivated tomatoes, not true wild species."
+    },
+    {
+      "id": "cultivated-reference",
+      "label": "Референтни културни домати",
+      "description": "Existing comparison references: cherry, large pink salad tomato, balcony varieties from AgroGradina."
+    }
+  ],
+  "items": [
+    {
+      "id": "microberry",
+      "name": "Microberry",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum lycopersicum, micro/currant-like cherry type",
+      "status": "cultivated currant-like, retail-labeled wild",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["yellow-orange tiny fruits", "early", "very productive", "large inflorescences up to about 100 small fruits"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 7, "drought_tolerance": 7, "heat_tolerance": 7, "root_power": 6, "root_size": 6, "plant_vigor": 8, "container_resilience": 7, "compact_space_efficiency": 6, "maintenance_ease": 6, "yield_per_plant": 7, "yield_per_square_meter": 8, "fruit_size": 1, "fruit_count": 10, "harvest_ease": 3, "sugar_content": 8, "flavor": 8, "greenhouse_value": 8, "rootstock_value": 5, "breeding_value": 7, "perennial_value": 7},
+      "raw": {"fruit_weight": "very small", "fruit_color": "yellow-orange", "source_quality": "retail morphology, evidence 2/5"}
+    },
+    {
+      "id": "minigelbus_f1",
+      "name": "Minigelbus F1",
+      "section": "compact-balcony-semenaonline",
+      "latin": "Solanum lycopersicum, compact yellow cherry F1",
+      "status": "cultivated F1 compact balcony tomato",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["very early", "compact low bush", "suitable for small pots and balcony", "yellow cherry fruits 15-20 g"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 6, "drought_tolerance": 7, "heat_tolerance": 7, "root_power": 5, "root_size": 4, "plant_vigor": 6, "container_resilience": 9, "compact_space_efficiency": 10, "maintenance_ease": 9, "yield_per_plant": 4, "yield_per_square_meter": 7, "fruit_size": 3, "fruit_count": 7, "harvest_ease": 9, "sugar_content": 8, "flavor": 7, "greenhouse_value": 8, "rootstock_value": 3, "breeding_value": 3, "perennial_value": 5},
+      "raw": {"fruit_weight": "15-20 g", "fruit_color": "yellow", "source_quality": "retail morphology, evidence 2/5"}
+    },
+    {
+      "id": "mirabelle",
+      "name": "Mirabelle",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum lycopersicum, yellow cocktail/cherry tomato",
+      "status": "cultivated cocktail tomato",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["French origin noted by retailer", "bushy growth", "yellow juicy fruits around 2 cm", "sweet-sour taste"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 6, "drought_tolerance": 7, "heat_tolerance": 7, "root_power": 6, "root_size": 6, "plant_vigor": 7, "container_resilience": 7, "compact_space_efficiency": 7, "maintenance_ease": 7, "yield_per_plant": 7, "yield_per_square_meter": 8, "fruit_size": 4, "fruit_count": 8, "harvest_ease": 8, "sugar_content": 8, "flavor": 8, "greenhouse_value": 8, "rootstock_value": 5, "breeding_value": 6, "perennial_value": 7},
+      "raw": {"fruit_size": "~2 cm", "fruit_color": "yellow", "source_quality": "retail morphology, evidence 2/5"}
+    },
+    {
+      "id": "gold_rush_pimpinellifolium",
+      "name": "Gold Rush",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum pimpinellifolium",
+      "status": "true wild/currant tomato species line",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["yellow wild/currant tomato", "fruit around 0.7-1 cm", "2-5 g", "clusters of 10-12 fruits"],
+      "scores": {"disease_resistance": 9, "fungal_resistance": 9, "drought_tolerance": 9, "heat_tolerance": 9, "root_power": 9, "root_size": 9, "plant_vigor": 10, "container_resilience": 6, "compact_space_efficiency": 3, "maintenance_ease": 4, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 1, "fruit_count": 10, "harvest_ease": 3, "sugar_content": 9, "flavor": 9, "greenhouse_value": 10, "rootstock_value": 9, "breeding_value": 10, "perennial_value": 10},
+      "raw": {"fruit_weight": "2-5 g", "fruit_size": "0.7-1 cm", "fruit_color": "yellow", "source_quality": "retail morphology + species-level science pending, evidence 3/5"}
+    },
+    {
+      "id": "minirotus_f1",
+      "name": "Minirotus F1",
+      "section": "compact-balcony-semenaonline",
+      "latin": "Solanum lycopersicum, compact red cherry F1",
+      "status": "cultivated F1 compact balcony tomato",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["very early", "compact", "20-30 cm height", "red round cherry fruits 15-20 g"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 6, "drought_tolerance": 7, "heat_tolerance": 7, "root_power": 5, "root_size": 4, "plant_vigor": 6, "container_resilience": 9, "compact_space_efficiency": 10, "maintenance_ease": 9, "yield_per_plant": 4, "yield_per_square_meter": 7, "fruit_size": 3, "fruit_count": 7, "harvest_ease": 9, "sugar_content": 7, "flavor": 7, "greenhouse_value": 8, "rootstock_value": 3, "breeding_value": 3, "perennial_value": 5},
+      "raw": {"fruit_weight": "15-20 g", "plant_height": "20-30 cm", "fruit_color": "red", "source_quality": "retail morphology, evidence 2/5"}
+    },
+    {
+      "id": "minipeelus_f1",
+      "name": "Minipeelus F1",
+      "section": "compact-balcony-semenaonline",
+      "latin": "Solanum lycopersicum, compact red oval F1",
+      "status": "cultivated F1 compact balcony tomato",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["early compact low bush", "20-30 cm height", "small oval red fruits", "suitable for pots/small space"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 6, "drought_tolerance": 7, "heat_tolerance": 7, "root_power": 5, "root_size": 4, "plant_vigor": 6, "container_resilience": 9, "compact_space_efficiency": 10, "maintenance_ease": 9, "yield_per_plant": 4, "yield_per_square_meter": 7, "fruit_size": 3, "fruit_count": 7, "harvest_ease": 9, "sugar_content": 7, "flavor": 7, "greenhouse_value": 8, "rootstock_value": 3, "breeding_value": 3, "perennial_value": 5},
+      "raw": {"fruit_shape": "small oval", "plant_height": "20-30 cm", "fruit_color": "red", "source_quality": "retail morphology, evidence 2/5"}
+    },
+    {
+      "id": "yellow_murmel_pimpinellifolium",
+      "name": "Murmel yellow",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum pimpinellifolium",
+      "status": "true wild/currant tomato species line",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["yellow wild tomato", "small sweet fruits", "early", "first harvest can be expected in July with timely sowing"],
+      "scores": {"disease_resistance": 9, "fungal_resistance": 9, "drought_tolerance": 9, "heat_tolerance": 9, "root_power": 9, "root_size": 9, "plant_vigor": 10, "container_resilience": 6, "compact_space_efficiency": 3, "maintenance_ease": 4, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 1, "fruit_count": 10, "harvest_ease": 3, "sugar_content": 9, "flavor": 9, "greenhouse_value": 10, "rootstock_value": 9, "breeding_value": 10, "perennial_value": 10},
+      "raw": {"fruit_color": "yellow", "source_quality": "retail morphology + species-level science pending, evidence 3/5"}
+    },
+    {
+      "id": "rote_murmel_pimpinellifolium",
+      "name": "Rote Murmel",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum pimpinellifolium",
+      "status": "true wild/currant tomato species line",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["red wild tomato", "small sweet fruits", "early", "popular wild tomato line"],
+      "scores": {"disease_resistance": 9, "fungal_resistance": 9, "drought_tolerance": 9, "heat_tolerance": 9, "root_power": 9, "root_size": 9, "plant_vigor": 10, "container_resilience": 6, "compact_space_efficiency": 3, "maintenance_ease": 4, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 1, "fruit_count": 10, "harvest_ease": 3, "sugar_content": 9, "flavor": 9, "greenhouse_value": 10, "rootstock_value": 9, "breeding_value": 10, "perennial_value": 10},
+      "raw": {"fruit_color": "red", "source_quality": "retail morphology + species-level science pending, evidence 3/5"}
+    },
+    {
+      "id": "sweet_pea_pimpinellifolium_semenaonline",
+      "name": "Sweet Pea / SemenaOnline",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum pimpinellifolium",
+      "status": "true wild/currant tomato species line",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["high-growing currant tomato", "small red fruits", "rich sweet taste", "retailer describes it as wild/currant/pea tomato"],
+      "aliasOf": "sweet_pea",
+      "scores": {"disease_resistance": 10, "fungal_resistance": 9, "drought_tolerance": 10, "heat_tolerance": 10, "root_power": 10, "root_size": 10, "plant_vigor": 10, "container_resilience": 6, "compact_space_efficiency": 3, "maintenance_ease": 4, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 1, "fruit_count": 10, "harvest_ease": 3, "sugar_content": 10, "flavor": 10, "greenhouse_value": 10, "rootstock_value": 10, "breeding_value": 10, "perennial_value": 10},
+      "raw": {"fruit_color": "red", "source_quality": "retail morphology + species-level science pending, evidence 3/5"}
+    },
+    {
+      "id": "bio_rote_murmel_pimpinellifolium",
+      "name": "BIO Rote Murmel",
+      "section": "wild-currant-semenaonline",
+      "latin": "Solanum pimpinellifolium",
+      "status": "true wild/currant tomato species line, organic seed lot",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["organic quality seed lot", "red Rote Murmel line", "small sweet fruits", "early"],
+      "scores": {"disease_resistance": 9, "fungal_resistance": 9, "drought_tolerance": 9, "heat_tolerance": 9, "root_power": 9, "root_size": 9, "plant_vigor": 10, "container_resilience": 6, "compact_space_efficiency": 3, "maintenance_ease": 4, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 1, "fruit_count": 10, "harvest_ease": 3, "sugar_content": 9, "flavor": 9, "greenhouse_value": 10, "rootstock_value": 9, "breeding_value": 10, "perennial_value": 10},
+      "raw": {"fruit_color": "red", "organic": "yes", "source_quality": "retail morphology + species-level science pending, evidence 3/5"}
+    },
+    {
+      "id": "vilma_semenaonline",
+      "name": "Vilma / SemenaOnline",
+      "section": "compact-balcony-semenaonline",
+      "latin": "Solanum lycopersicum, dwarf balcony tomato",
+      "status": "cultivated compact balcony tomato",
+      "sourceUrl": "https://www.semenaonline.bg/zelencuci/semena-na-zelencuci/plodovi-zelencuci/domati/divi-domati",
+      "retailFacts": ["early compact variety", "suitable for pots/balcony", "30-40 cm height", "up to about 150 small red fruits per plant", "fruit weight 15-20 g"],
+      "aliasOf": "vilma",
+      "scores": {"disease_resistance": 7, "fungal_resistance": 7, "drought_tolerance": 6, "heat_tolerance": 6, "root_power": 4, "root_size": 3, "plant_vigor": 5, "container_resilience": 10, "compact_space_efficiency": 10, "maintenance_ease": 10, "yield_per_plant": 4, "yield_per_square_meter": 7, "fruit_size": 3, "fruit_count": 8, "harvest_ease": 9, "sugar_content": 7, "flavor": 7, "greenhouse_value": 7, "rootstock_value": 2, "breeding_value": 5, "perennial_value": 4},
+      "raw": {"fruit_weight": "15-20 g", "plant_height": "30-40 cm", "fruit_count": "up to 150 per plant", "source_quality": "retail morphology, evidence 2/5"}
+    }
+  ]
+}
