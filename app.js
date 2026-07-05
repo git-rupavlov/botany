@@ -1,13 +1,73 @@
 const DATASET_URL = "data/comparisons/tomatoes-wild-cherry-rozova-mechta.json";
 
+const RADAR_PRESETS = {
+  botanical: {
+    label: "Ботанически",
+    axes: [
+      "disease_resistance",
+      "fungal_resistance",
+      "virus_resistance",
+      "drought_tolerance",
+      "heat_tolerance",
+      "cold_tolerance",
+      "low_soil_fertility_tolerance",
+      "salinity_tolerance",
+      "root_power",
+      "root_size",
+      "root_regeneration",
+      "plant_vigor",
+      "plant_size",
+      "pruning_recovery",
+      "perennial_value",
+      "breeding_value"
+    ]
+  },
+  industrial: {
+    label: "Стопански - масова индустрия",
+    axes: [
+      "yield_per_plant",
+      "yield_per_square_meter",
+      "yield_per_root_mass",
+      "fruit_size",
+      "harvest_ease",
+      "market_value",
+      "cracking_resistance",
+      "disease_resistance",
+      "fungal_resistance",
+      "fruiting_duration",
+      "greenhouse_value"
+    ]
+  },
+  hobbyOrganic: {
+    label: "Стопански - био/любителско",
+    axes: [
+      "flavor",
+      "sugar_content",
+      "vitamin_c",
+      "lycopene",
+      "beta_carotene",
+      "antioxidants",
+      "minerals",
+      "disease_resistance",
+      "drought_tolerance",
+      "low_soil_fertility_tolerance",
+      "root_power",
+      "fruiting_duration",
+      "perennial_value",
+      "greenhouse_value"
+    ]
+  }
+};
+
 const state = {
   dataset: null,
   selectedAxes: [],
+  selectedPreset: "custom",
+  selectedEntityIds: [],
   colors: ["#78d98c", "#ffd166", "#ff6b6b", "#7cc7ff", "#c792ea"]
 };
 
 const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -19,6 +79,35 @@ function getMetric(metricId) {
 
 function getScore(entity, metricId) {
   return entity.scores[metricId] ?? null;
+}
+
+function getSelectedEntities() {
+  const selected = state.dataset.entities.filter((entity) => state.selectedEntityIds.includes(entity.id));
+  return selected.length > 0 ? selected : state.dataset.entities.slice(0, 1);
+}
+
+function getEntityColor(entity) {
+  const index = state.dataset.entities.findIndex((item) => item.id === entity.id);
+  return state.colors[index % state.colors.length];
+}
+
+function arraysEqual(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function detectPreset() {
+  const match = Object.entries(RADAR_PRESETS).find(([, preset]) => arraysEqual(preset.axes, state.selectedAxes));
+  state.selectedPreset = match ? match[0] : "custom";
+}
+
+function refreshComparisonViews() {
+  renderPlantProfiles();
+  renderProfiles();
+  renderTable();
+  drawRadar();
+  drawTimeline();
+  drawQuadrant();
+  updateDatasetMeta();
 }
 
 function drawText(ctx, text, x, y, options = {}) {
@@ -51,12 +140,13 @@ function drawRadar() {
   const ctx = clearCanvas(canvas);
   ctx.scale(scale, scale);
 
-  const w = canvas.width / scale;
-  const h = canvas.height / scale;
-  const centerX = w / 2;
-  const centerY = h / 2 + 10;
-  const radius = Math.min(w, h) * 0.34;
+  const width = canvas.width / scale;
+  const height = canvas.height / scale;
+  const centerX = width / 2;
+  const centerY = height / 2 + 10;
+  const radius = Math.min(width, height) * 0.34;
   const axes = state.selectedAxes.map(getMetric).filter(Boolean);
+  const entities = getSelectedEntities();
   const axisCount = axes.length;
 
   if (axisCount < 3) {
@@ -100,7 +190,8 @@ function drawRadar() {
     });
   });
 
-  state.dataset.entities.forEach((entity, entityIndex) => {
+  entities.forEach((entity) => {
+    const color = getEntityColor(entity);
     ctx.beginPath();
     axes.forEach((axis, axisIndex) => {
       const angle = -Math.PI / 2 + (Math.PI * 2 * axisIndex) / axisCount;
@@ -112,14 +203,14 @@ function drawRadar() {
       else ctx.lineTo(x, y);
     });
     ctx.closePath();
-    ctx.strokeStyle = state.colors[entityIndex % state.colors.length];
-    ctx.fillStyle = `${state.colors[entityIndex % state.colors.length]}26`;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = `${color}26`;
     ctx.lineWidth = 2;
     ctx.fill();
     ctx.stroke();
   });
 
-  drawLegend(ctx, state.dataset.entities.map((entity, i) => ({ label: entity.name, color: state.colors[i % state.colors.length] })), 18, 18);
+  drawLegend(ctx, entities.map((entity) => ({ label: entity.name, color: getEntityColor(entity) })), 18, 18);
 }
 
 function drawLegend(ctx, items, x, y) {
@@ -140,44 +231,45 @@ function drawTimeline() {
   const ctx = clearCanvas(canvas);
   ctx.scale(scale, scale);
 
-  const w = canvas.width / scale;
-  const h = canvas.height / scale;
+  const width = canvas.width / scale;
+  const height = canvas.height / scale;
   const pad = { left: 46, right: 20, top: 30, bottom: 42 };
-  const plotW = w - pad.left - pad.right;
-  const plotH = h - pad.top - pad.bottom;
+  const plotW = width - pad.left - pad.right;
+  const plotH = height - pad.top - pad.bottom;
   const timeline = state.dataset.timeline;
-  const maxY = 10;
+  const entities = getSelectedEntities();
 
-  drawAxes(ctx, pad, plotW, plotH, maxY);
+  drawAxes(ctx, pad, plotW, plotH, 10);
 
   timeline.labels.forEach((label, index) => {
     const x = pad.left + (plotW * index) / (timeline.labels.length - 1);
-    drawText(ctx, label, x, h - 18, { color: "#a8b8ac", font: "12px Inter, system-ui, sans-serif" });
+    drawText(ctx, label, x, height - 18, { color: "#a8b8ac", font: "12px Inter, system-ui, sans-serif" });
   });
 
-  state.dataset.entities.forEach((entity, entityIndex) => {
+  entities.forEach((entity) => {
     const series = timeline.series[entity.id]?.[metricId] || [];
+    const color = getEntityColor(entity);
     ctx.beginPath();
     series.forEach((value, index) => {
       const x = pad.left + (plotW * index) / (series.length - 1);
-      const y = pad.top + plotH - plotH * (value / maxY);
+      const y = pad.top + plotH - plotH * (value / 10);
       if (index === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
-    ctx.strokeStyle = state.colors[entityIndex % state.colors.length];
+    ctx.strokeStyle = color;
     ctx.lineWidth = 2.5;
     ctx.stroke();
     series.forEach((value, index) => {
       const x = pad.left + (plotW * index) / (series.length - 1);
-      const y = pad.top + plotH - plotH * (value / maxY);
-      ctx.fillStyle = state.colors[entityIndex % state.colors.length];
+      const y = pad.top + plotH - plotH * (value / 10);
+      ctx.fillStyle = color;
       ctx.beginPath();
       ctx.arc(x, y, 4, 0, Math.PI * 2);
       ctx.fill();
     });
   });
 
-  drawLegend(ctx, state.dataset.entities.map((entity, i) => ({ label: entity.name, color: state.colors[i % state.colors.length] })), pad.left, 8);
+  drawLegend(ctx, entities.map((entity) => ({ label: entity.name, color: getEntityColor(entity) })), pad.left, 8);
 }
 
 function drawAxes(ctx, pad, plotW, plotH, maxY) {
@@ -210,11 +302,12 @@ function drawQuadrant() {
   const ctx = clearCanvas(canvas);
   ctx.scale(scale, scale);
 
-  const w = canvas.width / scale;
-  const h = canvas.height / scale;
+  const width = canvas.width / scale;
+  const height = canvas.height / scale;
   const pad = { left: 56, right: 24, top: 28, bottom: 52 };
-  const plotW = w - pad.left - pad.right;
-  const plotH = h - pad.top - pad.bottom;
+  const plotW = width - pad.left - pad.right;
+  const plotH = height - pad.top - pad.bottom;
+  const entities = getSelectedEntities();
 
   drawAxes(ctx, pad, plotW, plotH, 10);
   const midX = pad.left + plotW / 2;
@@ -229,19 +322,19 @@ function drawQuadrant() {
   ctx.stroke();
   ctx.setLineDash([]);
 
-  drawText(ctx, xMetric.shortLabel || xMetric.label, pad.left + plotW / 2, h - 18, { color: "#a8b8ac", font: "13px Inter, system-ui, sans-serif" });
+  drawText(ctx, xMetric.shortLabel || xMetric.label, pad.left + plotW / 2, height - 18, { color: "#a8b8ac", font: "13px Inter, system-ui, sans-serif" });
   ctx.save();
   ctx.translate(18, pad.top + plotH / 2);
   ctx.rotate(-Math.PI / 2);
   drawText(ctx, yMetric.shortLabel || yMetric.label, 0, 0, { color: "#a8b8ac", font: "13px Inter, system-ui, sans-serif" });
   ctx.restore();
 
-  state.dataset.entities.forEach((entity, entityIndex) => {
+  entities.forEach((entity) => {
     const xValue = getScore(entity, xMetricId) ?? 0;
     const yValue = getScore(entity, yMetricId) ?? 0;
     const x = pad.left + plotW * (xValue / 10);
     const y = pad.top + plotH - plotH * (yValue / 10);
-    ctx.fillStyle = state.colors[entityIndex % state.colors.length];
+    ctx.fillStyle = getEntityColor(entity);
     ctx.beginPath();
     ctx.arc(x, y, 9, 0, Math.PI * 2);
     ctx.fill();
@@ -249,9 +342,60 @@ function drawQuadrant() {
   });
 }
 
+function renderEntityControls() {
+  const container = $("#entityControls");
+  container.innerHTML = "";
+
+  state.dataset.entities.forEach((entity) => {
+    const isActive = state.selectedEntityIds.includes(entity.id);
+    const label = document.createElement("label");
+    label.className = `entity-toggle ${isActive ? "active" : ""}`;
+    label.innerHTML = `
+      <input type="checkbox" value="${entity.id}" ${isActive ? "checked" : ""} />
+      <span>${entity.name}</span>
+      <small>${entity.profile?.category || "plant"}</small>
+    `;
+    label.querySelector("input").addEventListener("change", (event) => {
+      const next = new Set(state.selectedEntityIds);
+      if (event.target.checked) next.add(entity.id);
+      else next.delete(entity.id);
+      if (next.size === 0) {
+        event.target.checked = true;
+        return;
+      }
+      state.selectedEntityIds = Array.from(next);
+      renderEntityControls();
+      refreshComparisonViews();
+    });
+    container.appendChild(label);
+  });
+}
+
+function renderRadarPresets() {
+  const container = $("#radarPresets");
+  container.innerHTML = "";
+
+  Object.entries(RADAR_PRESETS).forEach(([key, preset]) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `preset-button ${state.selectedPreset === key ? "active" : ""}`;
+    button.textContent = preset.label;
+    button.addEventListener("click", () => {
+      state.selectedAxes = preset.axes;
+      state.selectedPreset = key;
+      renderRadarPresets();
+      renderAxisControls();
+      drawRadar();
+    });
+    container.appendChild(button);
+  });
+}
+
 function renderAxisControls() {
+  detectPreset();
   const container = $("#axisControls");
   container.innerHTML = "";
+
   state.dataset.metrics.forEach((metric) => {
     const button = document.createElement("button");
     button.type = "button";
@@ -263,6 +407,8 @@ function renderAxisControls() {
       } else {
         state.selectedAxes.push(metric.id);
       }
+      detectPreset();
+      renderRadarPresets();
       renderAxisControls();
       drawRadar();
     });
@@ -275,7 +421,7 @@ function renderPlantProfiles() {
   if (!container) return;
   container.innerHTML = "";
 
-  state.dataset.entities.forEach((entity) => {
+  getSelectedEntities().forEach((entity) => {
     const profile = entity.profile || {};
     const article = document.createElement("article");
     article.className = "plant-profile";
@@ -290,18 +436,15 @@ function renderPlantProfiles() {
         </div>
         <p class="muted">${profile.overview || entity.summary}</p>
       </header>
-
       <div class="profile-stats">
         ${renderProfileStat("Растеж", profile.growthHabit)}
         ${renderProfileStat("Плод", entity.fruitWeight)}
         ${renderProfileStat("Добив / растение", entity.yieldPerPlant)}
         ${renderProfileStat("Захари", entity.sugarPer100g)}
       </div>
-
       ${renderProfileBlock("Силни страни", profile.strengths)}
       ${renderProfileBlock("Слаби страни", profile.weaknesses)}
       ${renderProfileBlock("Най-добра употреба", profile.bestUse)}
-
       <div class="profile-tags">
         ${(profile.tags || []).map((tag) => `<span class="profile-tag">${tag}</span>`).join("")}
       </div>
@@ -329,7 +472,7 @@ function renderProfileBlock(title, items) {
 function renderProfiles() {
   const container = $("#profiles");
   container.innerHTML = "";
-  state.dataset.entities.forEach((entity) => {
+  getSelectedEntities().forEach((entity) => {
     const card = document.createElement("article");
     card.className = "card";
     card.innerHTML = `
@@ -350,6 +493,7 @@ function renderProfiles() {
 function renderTable() {
   const filter = $("#metricFilter").value.toLowerCase().trim();
   const table = $("#comparisonTable");
+  const entities = getSelectedEntities();
   const metrics = state.dataset.metrics.filter((metric) => {
     const haystack = `${metric.label} ${metric.group} ${metric.note || ""}`.toLowerCase();
     return !filter || haystack.includes(filter);
@@ -360,7 +504,7 @@ function renderTable() {
       <tr>
         <th>Показател</th>
         <th>Група</th>
-        ${state.dataset.entities.map((entity) => `<th>${entity.name}</th>`).join("")}
+        ${entities.map((entity) => `<th>${entity.name}</th>`).join("")}
         <th>Бележка</th>
       </tr>
     </thead>`;
@@ -369,7 +513,7 @@ function renderTable() {
     <tr>
       <td><strong>${metric.label}</strong><small>${metric.unit || "оценка 0-10"}</small></td>
       <td>${metric.group}</td>
-      ${state.dataset.entities.map((entity) => `<td>${formatMetricValue(entity, metric)}</td>`).join("")}
+      ${entities.map((entity) => `<td>${formatMetricValue(entity, metric)}</td>`).join("")}
       <td class="muted">${metric.note || ""}</td>
     </tr>
   `).join("");
@@ -396,17 +540,23 @@ function populateSelect(select, metrics, selectedValue) {
   if (selectedValue) select.value = selectedValue;
 }
 
+function updateDatasetMeta() {
+  const selectedCount = getSelectedEntities().length;
+  $("#datasetMeta").textContent = `${selectedCount}/${state.dataset.entities.length} вида избрани · ${state.dataset.metrics.length} показателя · ${state.dataset.updated}`;
+}
+
 function copyJson() {
   navigator.clipboard.writeText(JSON.stringify(state.dataset, null, 2));
 }
 
 function downloadCsv() {
-  const rows = [["metric", "group", ...state.dataset.entities.map((entity) => entity.name), "note"]];
+  const entities = getSelectedEntities();
+  const rows = [["metric", "group", ...entities.map((entity) => entity.name), "note"]];
   state.dataset.metrics.forEach((metric) => {
     rows.push([
       metric.label,
       metric.group,
-      ...state.dataset.entities.map((entity) => getScore(entity, metric.id) ?? ""),
+      ...entities.map((entity) => getScore(entity, metric.id) ?? ""),
       metric.note || ""
     ]);
   });
@@ -415,7 +565,7 @@ function downloadCsv() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `${state.dataset.id}.csv`;
+  link.download = `${state.dataset.id}-selected.csv`;
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -423,16 +573,20 @@ function downloadCsv() {
 async function init() {
   const response = await fetch(DATASET_URL);
   state.dataset = await response.json();
-  state.selectedAxes = state.dataset.defaultRadarAxes;
+  state.selectedAxes = RADAR_PRESETS.botanical.axes;
+  state.selectedPreset = "botanical";
+  state.selectedEntityIds = state.dataset.entities.map((entity) => entity.id);
 
   $("#datasetTitle").textContent = state.dataset.title;
-  $("#datasetMeta").textContent = `${state.dataset.entities.length} вида · ${state.dataset.metrics.length} показателя · ${state.dataset.updated}`;
   $("#rawData").textContent = JSON.stringify(state.dataset, null, 2);
 
-  renderPlantProfiles();
+  renderEntityControls();
+  renderRadarPresets();
   renderAxisControls();
+  renderPlantProfiles();
   renderProfiles();
   renderTable();
+  updateDatasetMeta();
 
   const metrics = state.dataset.metrics;
   populateSelect($("#timelineMetric"), metrics.filter((metric) => metric.timeline), "yield_per_plant");
@@ -443,8 +597,20 @@ async function init() {
   drawTimeline();
   drawQuadrant();
 
+  $("#selectAllEntities").addEventListener("click", () => {
+    state.selectedEntityIds = state.dataset.entities.map((entity) => entity.id);
+    renderEntityControls();
+    refreshComparisonViews();
+  });
+  $("#clearEntitySelection").addEventListener("click", () => {
+    state.selectedEntityIds = [state.dataset.entities[0].id];
+    renderEntityControls();
+    refreshComparisonViews();
+  });
   $("#resetAxes").addEventListener("click", () => {
     state.selectedAxes = state.dataset.defaultRadarAxes;
+    state.selectedPreset = "custom";
+    renderRadarPresets();
     renderAxisControls();
     drawRadar();
   });
