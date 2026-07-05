@@ -94,6 +94,10 @@ button { cursor: pointer; }
 .entity-toggle small { color: var(--muted); }
 .empty-state { color: var(--muted); padding: 16px; border: 1px dashed var(--line); border-radius: 14px; }
 
+.preset-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 12px; }
+.preset-button { border-radius: 999px; color: var(--muted); }
+.preset-button.active { background: rgba(255,209,102,0.16); color: var(--text); border-color: rgba(255,209,102,0.75); }
+
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
 .chip { border-radius: 999px; padding: 8px 11px; color: var(--muted); }
 .chip.active { background: rgba(120,217,140,0.16); color: var(--text); border-color: rgba(120,217,140,0.7); }
