@@ -1,6 +1,6 @@
 const CATALOG_URLS = [
-  "data/catalog/semenaonline-tomatoes.json?v=20260705-3",
-  "data/catalog/bulgaria-cultivated-tomatoes.json?v=20260705-2"
+  "data/catalog/semenaonline-tomatoes.json?v=20260705-4",
+  "data/catalog/bulgaria-cultivated-tomatoes.json?v=20260705-3"
 ];
 
 const BOTANICAL_SECTIONS = [
@@ -12,20 +12,24 @@ const BOTANICAL_SECTIONS = [
   { id: "cultivated-crispr", label: "Култивирани (КРИСПР)", description: "Няма добавени линии." }
 ];
 
+const CONSUMER_METRICS = [
+  { id: "availability", label: "Наличност", shortLabel: "Наличност", group: "Консуматор", timeline: false, note: "Колко лесно може да се намери като семена/разсад/плод в България или масовия пазар." },
+  { id: "phytonutrient_profile", label: "Пълен профил вещества", shortLabel: "Профил вещества", group: "Консуматор", timeline: false, note: "Ширина на хранителния профил: витамини, минерали, каротеноиди, ликопен, антиоксиданти и други полезни вещества." },
+  { id: "body_benefit_per_100g", label: "Полза за тялото / 100 g", shortLabel: "Полза / 100g", group: "Консуматор", timeline: false, note: "Оценка на полезността на 100 g плод на база плътност на полезни вещества. Работен индекс, не медицинско твърдение." }
+];
+
 const SECTION_ORDER = BOTANICAL_SECTIONS.map((section) => section.id);
 const SKIP_ITEM_IDS = new Set(["bio_rote_murmel_pimpinellifolium", "sweet_pea_pimpinellifolium_semenaonline", "vilma_semenaonline"]);
 
-function sectionLabel(sectionId) {
-  return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.label || sectionId;
-}
+function sectionLabel(sectionId) { return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.label || sectionId; }
+function sectionDescription(sectionId) { return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.description || ""; }
+function sectionRank(sectionId) { const index = SECTION_ORDER.indexOf(sectionId); return index === -1 ? 99 : index; }
 
-function sectionDescription(sectionId) {
-  return BOTANICAL_SECTIONS.find((section) => section.id === sectionId)?.description || "";
-}
-
-function sectionRank(sectionId) {
-  const index = SECTION_ORDER.indexOf(sectionId);
-  return index === -1 ? 99 : index;
+function ensureConsumerMetrics() {
+  const existing = new Set(state.dataset.metrics.map((metric) => metric.id));
+  CONSUMER_METRICS.forEach((metric) => {
+    if (!existing.has(metric.id)) state.dataset.metrics.push(metric);
+  });
 }
 
 function classifyText(text) {
@@ -38,18 +42,43 @@ function classifyText(text) {
   return "cultivated-stable";
 }
 
-function classifyItem(item) {
-  return classifyText(`${item.id || ""} ${item.name || ""} ${item.latin || ""} ${item.status || ""} ${item.section || ""}`);
+function classifyItem(item) { return classifyText(`${item.id || ""} ${item.name || ""} ${item.latin || ""} ${item.status || ""} ${item.section || ""}`); }
+function classifyEntity(entity) { return classifyText(`${entity.id || ""} ${entity.name || ""} ${entity.latin || ""} ${entity.role || ""} ${entity.profile?.category || ""}`); }
+
+function hasText(entity, words) {
+  const value = `${entity.id || ""} ${entity.name || ""} ${entity.latin || ""} ${entity.role || ""} ${entity.summary || ""}`.toLowerCase();
+  return words.some((word) => value.includes(word));
 }
 
-function classifyEntity(entity) {
-  return classifyText(`${entity.id || ""} ${entity.name || ""} ${entity.latin || ""} ${entity.role || ""} ${entity.profile?.category || ""}`);
+function consumerScore(entity, metricId) {
+  const section = entity.section || classifyEntity(entity);
+  if (metricId === "availability") {
+    if (section === "cultivated-stable") return 8;
+    if (section === "cultivated-f1") return 7;
+    if (section === "semi-wild") return 5;
+    if (section === "wild") return 4;
+    return 1;
+  }
+  if (metricId === "phytonutrient_profile") {
+    if (hasText(entity, ["yellow", "orange", "жълт", "оранж"])) return 8;
+    if (section === "wild" || section === "semi-wild") return 9;
+    if (hasText(entity, ["cherry", "чери", "currant"])) return 8;
+    return 7;
+  }
+  if (metricId === "body_benefit_per_100g") {
+    if (section === "wild" || section === "semi-wild") return 9;
+    if (hasText(entity, ["cherry", "чери", "yellow", "orange", "жълт", "оранж"])) return 8;
+    return 7;
+  }
+  return null;
 }
 
 function defaultScore(entity, metric) {
+  const special = consumerScore(entity, metric.id);
+  if (special !== null) return special;
+
   const section = entity.section || classifyEntity(entity);
   const group = metric.group;
-
   if (section === "wild") {
     if (["Здраве", "Климат", "Почва", "Корени", "Селекция"].includes(group)) return 8;
     if (metric.id === "fruit_size" || metric.id === "harvest_ease") return 3;
@@ -75,9 +104,7 @@ function defaultScore(entity, metric) {
 function ensureScores(entity) {
   const scores = { ...(entity.scores || {}) };
   state.dataset.metrics.forEach((metric) => {
-    if (scores[metric.id] === undefined || scores[metric.id] === null || Number.isNaN(scores[metric.id])) {
-      scores[metric.id] = defaultScore(entity, metric);
-    }
+    if (scores[metric.id] === undefined || scores[metric.id] === null || Number.isNaN(scores[metric.id])) scores[metric.id] = defaultScore(entity, metric);
   });
   entity.scores = scores;
   return entity;
@@ -143,11 +170,7 @@ function buildBestUse(section) {
   return ["само при конкретна доказана линия"];
 }
 
-function keepCatalogItem(item) {
-  if (SKIP_ITEM_IDS.has(item.id)) return false;
-  if (item.aliasOf) return false;
-  return true;
-}
+function keepCatalogItem(item) { return !SKIP_ITEM_IDS.has(item.id) && !item.aliasOf; }
 
 async function waitForBaseDataset() {
   for (let i = 0; i < 80; i += 1) {
@@ -174,6 +197,7 @@ async function loadCatalogLayer() {
   const ready = await waitForBaseDataset();
   if (!ready) return;
 
+  ensureConsumerMetrics();
   const catalogs = await loadCatalogs();
   state.catalogs = catalogs;
   state.catalogSections = BOTANICAL_SECTIONS;
@@ -193,6 +217,8 @@ async function loadCatalogLayer() {
   state.dataset.entities.push(...newEntities);
   state.selectedEntityIds = state.dataset.entities.map((entity) => entity.id);
 
+  renderRadarPresets();
+  renderAxisControls();
   renderEntityControls();
   refreshComparisonViews();
   document.querySelector("#rawData").textContent = JSON.stringify(state.dataset, null, 2);
@@ -211,46 +237,35 @@ renderEntityControls = function renderGroupedEntityControls() {
     groups.get(section).push(entity);
   });
 
-  [...groups.entries()]
-    .sort(([left], [right]) => sectionRank(left) - sectionRank(right) || left.localeCompare(right))
-    .forEach(([sectionId, entities]) => {
-      const section = document.createElement("section");
-      section.className = "entity-section";
-      section.innerHTML = `
-        <header class="entity-section-header">
-          <div>
-            <h3>${sectionLabel(sectionId)}</h3>
-            <p>${sectionDescription(sectionId)}</p>
-          </div>
-          <button type="button" class="section-toggle">Toggle</button>
-        </header>
-        <div class="entity-section-items"></div>
-      `;
-
-      const items = section.querySelector(".entity-section-items");
-      if (entities.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "empty-state";
-        empty.textContent = "Няма добавени видове в тази категория.";
-        items.appendChild(empty);
-      } else {
-        entities.forEach((entity) => items.appendChild(makeEntityToggle(entity)));
-      }
-
-      section.querySelector(".section-toggle").addEventListener("click", () => {
-        if (entities.length === 0) return;
-        const ids = entities.map((entity) => entity.id);
-        const allActive = ids.every((id) => state.selectedEntityIds.includes(id));
-        const next = new Set(state.selectedEntityIds);
-        ids.forEach((id) => allActive ? next.delete(id) : next.add(id));
-        if (next.size === 0) ids.forEach((id) => next.add(id));
-        state.selectedEntityIds = [...next];
-        renderEntityControls();
-        refreshComparisonViews();
-      });
-
-      container.appendChild(section);
+  [...groups.entries()].sort(([left], [right]) => sectionRank(left) - sectionRank(right) || left.localeCompare(right)).forEach(([sectionId, entities]) => {
+    const section = document.createElement("section");
+    section.className = "entity-section";
+    section.innerHTML = `
+      <header class="entity-section-header"><div><h3>${sectionLabel(sectionId)}</h3><p>${sectionDescription(sectionId)}</p></div><button type="button" class="section-toggle">Toggle</button></header>
+      <div class="entity-section-items"></div>
+    `;
+    const items = section.querySelector(".entity-section-items");
+    if (entities.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "Няма добавени видове в тази категория.";
+      items.appendChild(empty);
+    } else {
+      entities.forEach((entity) => items.appendChild(makeEntityToggle(entity)));
+    }
+    section.querySelector(".section-toggle").addEventListener("click", () => {
+      if (entities.length === 0) return;
+      const ids = entities.map((entity) => entity.id);
+      const allActive = ids.every((id) => state.selectedEntityIds.includes(id));
+      const next = new Set(state.selectedEntityIds);
+      ids.forEach((id) => allActive ? next.delete(id) : next.add(id));
+      if (next.size === 0) ids.forEach((id) => next.add(id));
+      state.selectedEntityIds = [...next];
+      renderEntityControls();
+      refreshComparisonViews();
     });
+    container.appendChild(section);
+  });
 };
 
 function makeEntityToggle(entity) {
