@@ -1,4 +1,4 @@
-const CATALOG_URL = "data/catalog/semenaonline-tomatoes.json?v=20260705-1";
+const CATALOG_URL = "data/catalog/semenaonline-tomatoes.json?v=20260705-2";
 
 function normalizeCatalogItem(item) {
   return {
@@ -28,7 +28,7 @@ function normalizeCatalogItem(item) {
     evidence: {
       retail: 2,
       scientific: item.latin?.includes("pimpinellifolium") ? 3 : 1,
-      note: "Retail source supplies morphology/availability. Scientific trait values need GRIN/NARO/university accession-level validation. Humanity invented source hierarchy so we may as well use it."
+      note: "Retail source supplies morphology and availability. Scientific trait values need GRIN, NARO, university or accession-level validation."
     }
   };
 }
@@ -47,7 +47,7 @@ function buildStrengths(item) {
 function buildWeaknesses(item) {
   const weaknesses = [];
   if (item.status?.includes("F1")) weaknesses.push("F1: не е стабилен избор за събиране на собствени семена");
-  if (!item.latin?.includes("pimpinellifolium")) weaknesses.push("не е истински див вид, въпреки че може да е в retail категория 'диви домати'");
+  if (!item.latin?.includes("pimpinellifolium")) weaknesses.push("не е истински див вид, дори когато е в retail категория 'диви домати'");
   if (item.section?.includes("wild")) weaknesses.push("малките плодове са по-бавни за бране");
   if (weaknesses.length === 0) weaknesses.push("научните показатели трябва да се потвърдят с първични източници");
   return weaknesses;
@@ -73,20 +73,31 @@ function sectionRank(sectionId) {
   return index === -1 ? 99 : index;
 }
 
+async function waitForBaseDataset() {
+  for (let i = 0; i < 80; i += 1) {
+    if (state?.dataset?.entities?.length) return true;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  return false;
+}
+
 async function loadCatalogLayer() {
+  const ready = await waitForBaseDataset();
+  if (!ready) return;
+
   try {
     const response = await fetch(CATALOG_URL, { cache: "no-store" });
     const catalog = await response.json();
     state.catalog = catalog;
 
+    state.dataset.entities.forEach((entity) => {
+      if (!entity.section) entity.section = inferSection(entity);
+    });
+
     const existingIds = new Set(state.dataset.entities.map((entity) => entity.id));
     const newEntities = catalog.items
       .filter((item) => !existingIds.has(item.id))
       .map(normalizeCatalogItem);
-
-    state.dataset.entities.forEach((entity) => {
-      if (!entity.section) entity.section = inferSection(entity);
-    });
 
     state.dataset.entities.push(...newEntities);
     state.selectedEntityIds = state.dataset.entities.map((entity) => entity.id);
@@ -100,13 +111,14 @@ async function loadCatalogLayer() {
 }
 
 function inferSection(entity) {
-  if (entity.id.includes("balconi") || entity.id.includes("venus") || entity.id.includes("vilma")) return "compact-balcony-semenaonline";
+  if (entity.id.includes("balconi") || entity.id.includes("venus") || entity.id.includes("vilma") || entity.id.includes("mini")) return "compact-balcony-semenaonline";
   if (entity.id.includes("sweet_pea") || entity.latin?.includes("pimpinellifolium")) return "wild-currant-semenaonline";
   return "cultivated-reference";
 }
 
 renderEntityControls = function renderGroupedEntityControls() {
   const container = document.querySelector("#entityControls");
+  if (!container || !state?.dataset?.entities) return;
   container.innerHTML = "";
 
   const groups = new Map();
@@ -174,4 +186,4 @@ function makeEntityToggle(entity) {
   return label;
 }
 
-window.addEventListener("load", loadCatalogLayer);
+loadCatalogLayer();
