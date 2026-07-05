@@ -1,4 +1,4 @@
-const BULGARIAN_CATALOG_URL = "data/catalog/bulgaria-heritage-tomatoes.json?v=20260705-3";
+const BULGARIAN_CATALOG_URL = "data/catalog/bulgaria-heritage-tomatoes.json?v=20260705-4";
 
 function waitForDatasetForBulgarianLayer() {
   return new Promise((resolve) => {
@@ -15,17 +15,6 @@ function waitForDatasetForBulgarianLayer() {
       }
     }, 50);
   });
-}
-
-function ensureBulgarianSelectorCategory() {
-  if (typeof BOTANICAL_SECTIONS === "undefined" || !Array.isArray(BOTANICAL_SECTIONS)) return;
-  if (!BOTANICAL_SECTIONS.some((section) => section.id === "bulgarian")) {
-    BOTANICAL_SECTIONS.splice(2, 0, {
-      id: "bulgarian",
-      label: "Български",
-      description: "Български стабилни, дворни, стари и масови културни домати. Това е категория видове в селектора, не radar preset."
-    });
-  }
 }
 
 function textOf(entity) {
@@ -45,10 +34,22 @@ function isBulgarianEntity(entity) {
   ].some((word) => text.includes(word));
 }
 
-function applyBulgarianSection(entity) {
+function addCategory(entity, categoryId) {
+  const sections = new Set(entity.sections || []);
+  if (entity.section) sections.add(entity.section);
+  sections.add(categoryId);
+  entity.sections = [...sections];
+  return entity;
+}
+
+function applyBulgarianCategory(entity) {
   if (isBulgarianEntity(entity) && !isF1Entity(entity)) {
-    entity.section = "bulgarian";
-    if (entity.profile) entity.profile.category = "Български";
+    addCategory(entity, "bulgarian");
+    if (entity.profile) {
+      const tags = new Set(entity.profile.tags || []);
+      tags.add("bulgarian");
+      entity.profile.tags = [...tags];
+    }
   }
   return entity;
 }
@@ -58,7 +59,8 @@ function normalizeBulgarianItem(item) {
   return {
     id: item.id,
     name: item.name,
-    section: "bulgarian",
+    section: "cultivated-stable",
+    sections: ["cultivated-stable", "bulgarian"],
     originalSection: item.section,
     latin: item.latin,
     role: item.status || "Bulgarian heritage tomato",
@@ -68,13 +70,13 @@ function normalizeBulgarianItem(item) {
     yieldPerSquareMeter: item.raw?.yield_per_square_meter || "n/a",
     sugarPer100g: item.raw?.sugar_content || "n/a",
     profile: {
-      category: "Български",
+      category: "Култивирани (стабилни)",
       growthHabit: "български дворен, стар или масов културен тип",
       overview: `${item.name}: ${facts.join("; ")}.`,
       strengths: ["българска градинска/историческа стойност", "подходящ за собствено семесъбиране, ако е стабилна линия"],
       weaknesses: ["част от историческите данни са работни и трябва да се потвърдят с първични източници"],
       bestUse: ["градина", "собствени семена", "историческо сравнение", "салата/консервиране според типа"],
-      tags: ["bulgarian", item.section || "heritage"]
+      tags: ["cultivated-stable", "bulgarian", item.section || "heritage"]
     },
     scores: item.scores || {},
     raw: item.raw || {},
@@ -86,8 +88,7 @@ async function loadBulgarianLayer() {
   const ready = await waitForDatasetForBulgarianLayer();
   if (!ready) return;
 
-  ensureBulgarianSelectorCategory();
-  state.dataset.entities.forEach(applyBulgarianSection);
+  state.dataset.entities.forEach(applyBulgarianCategory);
 
   try {
     const response = await fetch(BULGARIAN_CATALOG_URL, { cache: "no-store" });
