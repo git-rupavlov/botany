@@ -1,4 +1,4 @@
-const DATASET_URL = "data/comparisons/tomatoes-wild-cherry-rozova-mechta.json";
+const DATASET_URL = "data/comparisons/tomatoes-wild-cherry-rozova-mechta.json?v=20260705-2";
 
 const RADAR_PRESETS = {
   botanical: {
@@ -571,7 +571,7 @@ function downloadCsv() {
 }
 
 async function init() {
-  const response = await fetch(DATASET_URL);
+  const response = await fetch(DATASET_URL, { cache: "no-store" });
   state.dataset = await response.json();
   state.selectedAxes = RADAR_PRESETS.botanical.axes;
   state.selectedPreset = "botanical";
