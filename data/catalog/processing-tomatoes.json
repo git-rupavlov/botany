@@ -1,0 +1,77 @@
+{
+  "id": "processing-tomatoes",
+  "title": "Processing and paste tomato catalog",
+  "updated": "2026-07-06",
+  "source": {
+    "name": "Processing tomato working catalog",
+    "usage": "Stable paste and processing tomatoes used for sauce, puree, canning and drying. Entries need later validation with cultivar catalogs and primary sources."
+  },
+  "items": [
+    {
+      "id": "roma_vf",
+      "name": "Roma VF",
+      "section": "cultivated-stable",
+      "latin": "Solanum lycopersicum, Roma paste tomato with VF resistance background",
+      "status": "stable paste / processing tomato",
+      "retailFacts": [
+        "класически пастообразен/консервен домат",
+        "детерминантен и сравнително компактен тип",
+        "червен plum/paste плод",
+        "месест плод с по-малко сок",
+        "подходящ за сос, пюре, консервиране, лютеница и сушене",
+        "VF фон: verticillium/fusarium resistance"
+      ],
+      "scores": {
+        "disease_resistance": 7,
+        "fungal_resistance": 7,
+        "virus_resistance": 6,
+        "cracking_resistance": 8,
+        "drought_tolerance": 6,
+        "heat_tolerance": 7,
+        "cold_tolerance": 5,
+        "low_soil_fertility_tolerance": 6,
+        "sun_need_efficiency": 7,
+        "salinity_tolerance": 5,
+        "container_resilience": 6,
+        "compact_space_efficiency": 7,
+        "maintenance_ease": 8,
+        "root_power": 6,
+        "root_size": 6,
+        "root_regeneration": 6,
+        "plant_vigor": 7,
+        "plant_size": 5,
+        "pruning_recovery": 6,
+        "perennial_value": 5,
+        "yield_per_plant": 8,
+        "yield_per_square_meter": 8,
+        "yield_per_root_mass": 8,
+        "fruiting_duration": 6,
+        "fruit_count": 8,
+        "fruit_size": 5,
+        "harvest_ease": 9,
+        "edible_value": 8,
+        "sugar_content": 6,
+        "vitamin_c": 8,
+        "lycopene": 9,
+        "beta_carotene": 7,
+        "minerals": 7,
+        "antioxidants": 8,
+        "flavor": 7,
+        "market_value": 8,
+        "greenhouse_value": 7,
+        "rootstock_value": 4,
+        "breeding_value": 6,
+        "availability": 8,
+        "phytonutrient_profile": 7,
+        "body_benefit_per_100g": 8
+      },
+      "raw": {
+        "fruit_color": "red",
+        "fruit_shape": "plum / paste",
+        "fruit_weight": "60-100 g",
+        "growth": "determinate",
+        "source_quality": "common cultivar knowledge, evidence 2/5"
+      }
+    }
+  ]
+}
