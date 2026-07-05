@@ -1,10 +1,10 @@
 {
   "id": "bulgaria-heritage-tomatoes",
-  "title": "Bulgarian heritage and socialist-era tomato working catalog",
+  "title": "Bulgarian heritage and processing tomato working catalog",
   "updated": "2026-07-05",
   "source": {
-    "name": "Bulgarian heritage tomato working catalog",
-    "usage": "Working layer for common Bulgarian garden tomatoes, socialist-era mass cultivars and older household-garden types. Exact historic claims must later be validated with Izk Maritsa, official variety lists, seed catalogs, herbarium/germplasm records and older agricultural literature."
+    "name": "Bulgarian heritage and processing tomato working catalog",
+    "usage": "Working layer for common Bulgarian garden tomatoes, socialist-era mass cultivars, older household-garden types and bush processing tomatoes. Exact historic claims must later be validated with Izk Maritsa, official variety lists, seed catalogs, herbarium/germplasm records and older agricultural literature."
   },
   "items": [
     {
@@ -15,7 +15,7 @@
       "status": "folk garden / local name type",
       "retailFacts": ["стар градински тип по народно име", "ценен основно за вкус и форма", "по-скоро дворна линия отколкото стандартизиран промишлен сорт"],
       "scores": {"flavor": 10, "market_value": 7, "breeding_value": 7, "rootstock_value": 4, "fruit_size": 8, "harvest_ease": 8, "availability": 4, "bulgarian_heritage_value": 10, "socialist_mass_value": 3, "household_garden_value": 10, "seed_saving_value": 8, "local_adaptation": 8},
-      "raw": {"fruit_color": "pink/red-pink", "fruit_shape": "folk ribbed/pear-like", "source_quality": "folk/common garden knowledge, evidence 1-2/5"}
+      "raw": {"growth_type": "индетерминантен или полуиндетерминантен дворен тип", "fruit_color": "pink/red-pink", "fruit_shape": "folk ribbed/pear-like", "source_quality": "folk/common garden knowledge, evidence 1-2/5"}
     },
     {
       "id": "stara_rozova_gradinska_linia",
@@ -25,7 +25,7 @@
       "status": "local household garden type",
       "retailFacts": ["общ стар розов дворен тип", "поддържан чрез собствени семена", "силен вкус, променлива форма и размер"],
       "scores": {"flavor": 10, "market_value": 7, "breeding_value": 7, "rootstock_value": 4, "fruit_size": 9, "harvest_ease": 8, "availability": 5, "bulgarian_heritage_value": 10, "socialist_mass_value": 4, "household_garden_value": 10, "seed_saving_value": 9, "local_adaptation": 8},
-      "raw": {"fruit_color": "pink", "fruit_weight": "200-500+ g", "source_quality": "household garden type, evidence 1-2/5"}
+      "raw": {"growth_type": "индетерминантен дворен тип", "fruit_color": "pink", "fruit_weight": "200-500+ g", "source_quality": "household garden type, evidence 1-2/5"}
     },
     {
       "id": "cherven_gradinski_star_tip",
@@ -35,7 +35,7 @@
       "status": "local red household garden type",
       "retailFacts": ["стар червен дворен тип", "универсален за салата и буркани", "по-лесен за семесъбиране от F1"],
       "scores": {"flavor": 8, "market_value": 7, "breeding_value": 6, "rootstock_value": 4, "fruit_size": 6, "harvest_ease": 8, "availability": 6, "bulgarian_heritage_value": 9, "socialist_mass_value": 6, "household_garden_value": 9, "seed_saving_value": 9, "local_adaptation": 8},
-      "raw": {"fruit_color": "red", "fruit_weight": "80-180 g", "source_quality": "household garden type, evidence 1-2/5"}
+      "raw": {"growth_type": "полудетерминантен или индетерминантен дворен тип", "fruit_color": "red", "fruit_weight": "80-180 g", "source_quality": "household garden type, evidence 1-2/5"}
     },
     {
       "id": "konserven_polski_tip",
@@ -45,7 +45,7 @@
       "status": "mass field/processing type",
       "retailFacts": ["масов червен тип за преработка", "подходящ за буркани, сок, лютеница и полско производство", "по-важен е добивът и еднородността от гурме вкуса"],
       "scores": {"flavor": 7, "market_value": 8, "breeding_value": 6, "rootstock_value": 4, "fruit_size": 5, "harvest_ease": 8, "availability": 7, "bulgarian_heritage_value": 8, "socialist_mass_value": 9, "household_garden_value": 7, "seed_saving_value": 8, "local_adaptation": 8},
-      "raw": {"fruit_color": "red", "use": "processing", "source_quality": "mass production type, evidence 2/5"}
+      "raw": {"growth_type": "детерминантен полски тип", "fruit_color": "red", "use": "processing", "source_quality": "mass production type, evidence 2/5"}
     },
     {
       "id": "edropolden_rozov_pazarenski_tip",
@@ -55,7 +55,57 @@
       "status": "large pink garden/market type",
       "retailFacts": ["едър розов тип за пазар и двор", "висока вкусово-пазарна стойност", "иска добра вода, колове и грижа"],
       "scores": {"flavor": 10, "market_value": 9, "breeding_value": 6, "rootstock_value": 4, "fruit_size": 10, "harvest_ease": 9, "availability": 6, "bulgarian_heritage_value": 9, "socialist_mass_value": 5, "household_garden_value": 9, "seed_saving_value": 8, "local_adaptation": 7},
-      "raw": {"fruit_color": "pink", "fruit_weight": "300-700+ g", "source_quality": "common market/garden type, evidence 2/5"}
+      "raw": {"growth_type": "индетерминантен едроплоден тип", "fruit_color": "pink", "fruit_weight": "300-700+ g", "source_quality": "common market/garden type, evidence 2/5"}
+    },
+    {
+      "id": "roma_vf",
+      "name": "Roma VF",
+      "section": "processing-bush",
+      "latin": "Solanum lycopersicum, determinate plum processing tomato",
+      "status": "stable bush processing tomato",
+      "retailFacts": ["сливовиден червен консервен домат", "храстовиден/детерминантен тип", "подходящ за сосове, паста, буркани и сушене", "по-ниско водно съдържание от салатните типове"],
+      "scores": {"flavor": 7, "market_value": 8, "breeding_value": 6, "rootstock_value": 3, "fruit_size": 5, "harvest_ease": 9, "availability": 8, "bulgarian_heritage_value": 5, "socialist_mass_value": 8, "household_garden_value": 8, "seed_saving_value": 8, "local_adaptation": 7, "yield_per_plant": 7, "yield_per_square_meter": 8, "disease_resistance": 7, "drought_tolerance": 7, "heat_tolerance": 7},
+      "raw": {"growth_type": "детерминантен храстовиден", "fruit_shape": "сливовиден", "fruit_color": "red", "fruit_weight": "60-100 g", "use": "processing/canning", "source_quality": "common processing cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "rio_grande",
+      "name": "Rio Grande",
+      "section": "processing-bush",
+      "latin": "Solanum lycopersicum, determinate plum processing tomato",
+      "status": "stable bush processing tomato",
+      "retailFacts": ["детерминантен полски консервен тип", "сливовидни месести плодове", "добър за лютеница, сосове и буркани", "по-практичен за еднократно/масово прибиране"],
+      "scores": {"flavor": 7, "market_value": 8, "breeding_value": 6, "rootstock_value": 3, "fruit_size": 6, "harvest_ease": 9, "availability": 8, "bulgarian_heritage_value": 5, "socialist_mass_value": 8, "household_garden_value": 8, "seed_saving_value": 8, "local_adaptation": 8, "yield_per_plant": 8, "yield_per_square_meter": 8, "disease_resistance": 7, "drought_tolerance": 7, "heat_tolerance": 8},
+      "raw": {"growth_type": "детерминантен храстовиден", "fruit_shape": "сливовиден", "fruit_color": "red", "fruit_weight": "80-120 g", "use": "processing/canning", "source_quality": "common processing cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "san_marzano_processing",
+      "name": "San Marzano / консервен тип",
+      "section": "processing-bush",
+      "latin": "Solanum lycopersicum, Italian paste tomato type",
+      "status": "paste/processing tomato type",
+      "retailFacts": ["класически паста/сос домат", "месест плод с по-малко семена", "не всички линии са храстовидни, но се използва като консервен тип", "добър за сос, паста и белене"],
+      "scores": {"flavor": 8, "market_value": 8, "breeding_value": 6, "rootstock_value": 3, "fruit_size": 6, "harvest_ease": 7, "availability": 7, "bulgarian_heritage_value": 4, "socialist_mass_value": 6, "household_garden_value": 7, "seed_saving_value": 8, "local_adaptation": 6, "yield_per_plant": 7, "yield_per_square_meter": 7, "disease_resistance": 6, "drought_tolerance": 6, "heat_tolerance": 7},
+      "raw": {"growth_type": "обикновено индетерминантен или полудетерминантен паста тип; не винаги храстовиден", "fruit_shape": "удължен сливовиден", "fruit_color": "red", "fruit_weight": "70-120 g", "use": "paste/sauce/canning", "source_quality": "common paste cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "heinz_processing",
+      "name": "Heinz processing type",
+      "section": "processing-bush",
+      "latin": "Solanum lycopersicum, determinate industrial processing tomato type",
+      "status": "industrial bush processing tomato type",
+      "retailFacts": ["индустриален тип за преработка", "детерминантен растеж", "подходящ за механизирано и концентрирано прибиране", "по-скоро преработка отколкото салата"],
+      "scores": {"flavor": 6, "market_value": 8, "breeding_value": 6, "rootstock_value": 3, "fruit_size": 5, "harvest_ease": 10, "availability": 6, "bulgarian_heritage_value": 4, "socialist_mass_value": 8, "household_garden_value": 6, "seed_saving_value": 7, "local_adaptation": 7, "yield_per_plant": 8, "yield_per_square_meter": 9, "disease_resistance": 7, "drought_tolerance": 7, "heat_tolerance": 8},
+      "raw": {"growth_type": "детерминантен индустриален храстовиден", "fruit_shape": "round/oval processing", "fruit_color": "red", "fruit_weight": "60-100 g", "use": "industrial processing/canning", "source_quality": "industrial processing type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "novichok_processing",
+      "name": "Новичок / консервен тип",
+      "section": "processing-bush",
+      "latin": "Solanum lycopersicum, determinate red processing tomato",
+      "status": "stable bush processing tomato",
+      "retailFacts": ["детерминантен храстовиден тип", "червени месести плодове", "подходящ за консервиране и полско производство", "практичен за по-компактна градина"],
+      "scores": {"flavor": 7, "market_value": 7, "breeding_value": 6, "rootstock_value": 3, "fruit_size": 5, "harvest_ease": 9, "availability": 6, "bulgarian_heritage_value": 5, "socialist_mass_value": 7, "household_garden_value": 7, "seed_saving_value": 8, "local_adaptation": 7, "yield_per_plant": 7, "yield_per_square_meter": 8, "disease_resistance": 6, "drought_tolerance": 7, "heat_tolerance": 7},
+      "raw": {"growth_type": "детерминантен храстовиден", "fruit_shape": "oval/round processing", "fruit_color": "red", "fruit_weight": "70-120 g", "use": "processing/canning", "source_quality": "common processing cultivar knowledge, evidence 2/5"}
     }
   ]
 }
