@@ -1,0 +1,143 @@
+{
+  "id": "peppers-bulgaria-region",
+  "title": "Peppers for Bulgaria and similar temperate Balkan climate",
+  "updated": "2026-07-07",
+  "source": {
+    "name": "Regional pepper working catalog",
+    "usage": "Initial catalog for sweet and hot Capsicum annuum types suitable for Bulgaria and similar Balkan/temperate conditions. Retail facts and common horticultural knowledge are used as working data; exact cultivar claims need seed-catalog and institutional validation."
+  },
+  "items": [
+    {
+      "id": "kurtovska_kapia",
+      "name": "Куртовска капия",
+      "crop": "pepper",
+      "section": "pepper-sweet",
+      "latin": "Capsicum annuum, Bulgarian kapia sweet pepper type",
+      "status": "stable sweet pepper / Bulgarian kapia type",
+      "retailFacts": ["класическа българска капия", "сладък червен плод", "много добра за печене, лютеница и консервиране", "подходяща за нашия климат"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 6, "heat_tolerance": 8, "cold_tolerance": 4, "low_soil_fertility_tolerance": 5, "sun_need_efficiency": 6, "root_power": 6, "root_size": 6, "plant_vigor": 7, "yield_per_plant": 8, "yield_per_square_meter": 8, "fruit_size": 8, "harvest_ease": 8, "edible_value": 10, "vitamin_c": 10, "minerals": 8, "antioxidants": 8, "flavor": 10, "market_value": 9, "availability": 9, "phytonutrient_profile": 8, "body_benefit_per_100g": 9, "container_resilience": 6, "compact_space_efficiency": 5, "maintenance_ease": 6},
+      "raw": {"fruit_color": "green to red", "fruit_shape": "kapia", "use": "roasting, lutenitsa, canning", "pungency": "sweet / 0 SHU", "source_quality": "regional cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "sivriya",
+      "name": "Сиврия",
+      "crop": "pepper",
+      "section": "pepper-sweet",
+      "latin": "Capsicum annuum, Balkan long sweet pepper type",
+      "status": "stable sweet long pepper type",
+      "retailFacts": ["дълга тънка сладка чушка", "ранна и практична за прясна консумация", "подходяща за градина и пазар"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 6, "heat_tolerance": 8, "cold_tolerance": 4, "low_soil_fertility_tolerance": 5, "sun_need_efficiency": 6, "root_power": 6, "root_size": 5, "plant_vigor": 7, "yield_per_plant": 7, "yield_per_square_meter": 8, "fruit_size": 6, "harvest_ease": 8, "edible_value": 10, "vitamin_c": 10, "minerals": 8, "antioxidants": 8, "flavor": 8, "market_value": 8, "availability": 8, "phytonutrient_profile": 8, "body_benefit_per_100g": 9, "container_resilience": 7, "compact_space_efficiency": 7, "maintenance_ease": 7},
+      "raw": {"fruit_color": "green to red/yellow depending line", "fruit_shape": "long horn", "pungency": "sweet / 0 SHU", "source_quality": "regional type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "california_wonder",
+      "name": "California Wonder",
+      "crop": "pepper",
+      "section": "pepper-sweet",
+      "latin": "Capsicum annuum, blocky bell pepper",
+      "status": "stable sweet bell pepper",
+      "retailFacts": ["класическа квадратна камбеста чушка", "дебела стена", "добра за прясна консумация и пълнене", "широко достъпна"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 5, "heat_tolerance": 7, "cold_tolerance": 4, "low_soil_fertility_tolerance": 5, "sun_need_efficiency": 5, "root_power": 6, "root_size": 6, "plant_vigor": 7, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 8, "harvest_ease": 8, "edible_value": 10, "vitamin_c": 10, "minerals": 8, "antioxidants": 8, "flavor": 8, "market_value": 8, "availability": 9, "phytonutrient_profile": 8, "body_benefit_per_100g": 9, "container_resilience": 6, "compact_space_efficiency": 5, "maintenance_ease": 6},
+      "raw": {"fruit_shape": "blocky bell", "pungency": "sweet / 0 SHU", "source_quality": "common cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "dolma_kamba",
+      "name": "Камба / Долма тип",
+      "crop": "pepper",
+      "section": "pepper-sweet",
+      "latin": "Capsicum annuum, stuffing pepper type",
+      "status": "stable sweet stuffing pepper type",
+      "retailFacts": ["камбест/долма тип", "добър за пълнене", "сладък плод", "подходящ за домашни градини"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 5, "heat_tolerance": 7, "cold_tolerance": 4, "low_soil_fertility_tolerance": 5, "sun_need_efficiency": 5, "root_power": 6, "root_size": 6, "plant_vigor": 7, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 8, "harvest_ease": 8, "edible_value": 10, "vitamin_c": 10, "minerals": 8, "antioxidants": 8, "flavor": 8, "market_value": 8, "availability": 7, "phytonutrient_profile": 8, "body_benefit_per_100g": 9, "container_resilience": 6, "compact_space_efficiency": 5, "maintenance_ease": 6},
+      "raw": {"fruit_shape": "round/blocky stuffing", "pungency": "sweet / 0 SHU", "source_quality": "regional type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "byal_piper_balkan",
+      "name": "Бял пипер / светъл балкански тип",
+      "crop": "pepper",
+      "section": "pepper-sweet",
+      "latin": "Capsicum annuum, pale Balkan sweet pepper type",
+      "status": "stable pale sweet pepper type",
+      "retailFacts": ["светла сладка чушка", "популярна в балкански градини", "добра за прясна консумация и готвене"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 6, "heat_tolerance": 8, "cold_tolerance": 4, "low_soil_fertility_tolerance": 5, "sun_need_efficiency": 6, "root_power": 6, "root_size": 5, "plant_vigor": 7, "yield_per_plant": 7, "yield_per_square_meter": 8, "fruit_size": 6, "harvest_ease": 8, "edible_value": 10, "vitamin_c": 10, "minerals": 8, "antioxidants": 7, "flavor": 8, "market_value": 7, "availability": 7, "phytonutrient_profile": 7, "body_benefit_per_100g": 8, "container_resilience": 7, "compact_space_efficiency": 7, "maintenance_ease": 7},
+      "raw": {"fruit_color": "pale yellow-green", "pungency": "sweet / 0 SHU", "source_quality": "regional type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "shipka_hot",
+      "name": "Шипка",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum, Bulgarian hot pepper type",
+      "status": "stable hot pepper / Bulgarian type",
+      "retailFacts": ["класическа българска люта чушка", "дребен до среден плод", "добра за туршии, сушене и подправка", "подходяща за нашия климат"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 7, "heat_tolerance": 9, "cold_tolerance": 4, "low_soil_fertility_tolerance": 6, "sun_need_efficiency": 7, "root_power": 6, "root_size": 5, "plant_vigor": 8, "yield_per_plant": 8, "yield_per_square_meter": 8, "fruit_size": 3, "fruit_count": 9, "harvest_ease": 7, "edible_value": 8, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 8, "market_value": 8, "availability": 8, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 8, "compact_space_efficiency": 8, "maintenance_ease": 8, "capsaicin_heat": 7},
+      "raw": {"fruit_shape": "small hot", "pungency": "hot", "source_quality": "Bulgarian/regional type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "ribki_hot",
+      "name": "Рибки",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum, Bulgarian small hot pepper type",
+      "status": "stable hot pepper / Bulgarian household type",
+      "retailFacts": ["малки люти чушки", "популярни в дворни градини", "подходящи за сушене, туршия и подправка"],
+      "scores": {"disease_resistance": 7, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 7, "heat_tolerance": 9, "cold_tolerance": 4, "low_soil_fertility_tolerance": 6, "sun_need_efficiency": 7, "root_power": 6, "root_size": 5, "plant_vigor": 8, "yield_per_plant": 7, "yield_per_square_meter": 8, "fruit_size": 2, "fruit_count": 9, "harvest_ease": 6, "edible_value": 7, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 8, "market_value": 7, "availability": 7, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 8, "compact_space_efficiency": 8, "maintenance_ease": 8, "capsaicin_heat": 8},
+      "raw": {"fruit_shape": "small fish-like/hot", "pungency": "hot", "source_quality": "household regional type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "chorbadjiyska",
+      "name": "Чорбаджийска чушка",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum, long mild-hot Balkan pepper type",
+      "status": "mild to medium hot regional pepper",
+      "retailFacts": ["дълга тънка люта или полу-люта чушка", "популярна за прясна консумация и туршия", "поносима лютивина за масова употреба"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 7, "heat_tolerance": 9, "cold_tolerance": 4, "low_soil_fertility_tolerance": 6, "sun_need_efficiency": 7, "root_power": 6, "root_size": 5, "plant_vigor": 8, "yield_per_plant": 8, "yield_per_square_meter": 8, "fruit_size": 6, "fruit_count": 8, "harvest_ease": 8, "edible_value": 9, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 9, "market_value": 8, "availability": 8, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 8, "compact_space_efficiency": 8, "maintenance_ease": 8, "capsaicin_heat": 5},
+      "raw": {"fruit_shape": "long thin", "pungency": "mild-hot to hot", "source_quality": "regional type knowledge, evidence 2/5"}
+    },
+    {
+      "id": "hungarian_hot_wax",
+      "name": "Hungarian Hot Wax",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum, Hungarian wax hot pepper",
+      "status": "stable hot wax pepper",
+      "retailFacts": ["добър за сходен климатичен пояс", "ранен и продуктивен", "жълт до оранжево-червен плод", "подходящ за туршия и готвене"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 7, "heat_tolerance": 8, "cold_tolerance": 5, "low_soil_fertility_tolerance": 6, "sun_need_efficiency": 7, "root_power": 6, "root_size": 5, "plant_vigor": 8, "yield_per_plant": 8, "yield_per_square_meter": 8, "fruit_size": 6, "fruit_count": 8, "harvest_ease": 8, "edible_value": 9, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 8, "market_value": 8, "availability": 7, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 8, "compact_space_efficiency": 8, "maintenance_ease": 8, "capsaicin_heat": 6},
+      "raw": {"fruit_color": "yellow to red", "pungency": "medium hot", "source_quality": "common cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "cayenne",
+      "name": "Cayenne",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum, cayenne hot pepper type",
+      "status": "stable hot pepper type",
+      "retailFacts": ["известен лют тип", "добър за сушене и прах", "продуктивен при топло лято"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 7, "heat_tolerance": 9, "cold_tolerance": 4, "low_soil_fertility_tolerance": 6, "sun_need_efficiency": 7, "root_power": 6, "root_size": 5, "plant_vigor": 8, "yield_per_plant": 8, "yield_per_square_meter": 8, "fruit_size": 4, "fruit_count": 9, "harvest_ease": 7, "edible_value": 7, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 7, "market_value": 8, "availability": 8, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 8, "compact_space_efficiency": 8, "maintenance_ease": 8, "capsaicin_heat": 9},
+      "raw": {"fruit_shape": "long thin", "pungency": "hot", "source_quality": "common cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "jalapeno",
+      "name": "Jalapeño",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum, jalapeño pepper type",
+      "status": "stable medium-hot pepper type",
+      "retailFacts": ["средно люта чушка", "дебела стена", "подходяща за саксии, туршии, пълнене и свежа употреба", "става в нашия климат при достатъчно топлина"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 6, "heat_tolerance": 8, "cold_tolerance": 4, "low_soil_fertility_tolerance": 5, "sun_need_efficiency": 6, "root_power": 6, "root_size": 5, "plant_vigor": 7, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 5, "fruit_count": 7, "harvest_ease": 8, "edible_value": 9, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 8, "market_value": 8, "availability": 7, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 8, "compact_space_efficiency": 8, "maintenance_ease": 8, "capsaicin_heat": 5},
+      "raw": {"fruit_shape": "short thick", "pungency": "medium hot", "source_quality": "common cultivar knowledge, evidence 2/5"}
+    },
+    {
+      "id": "piri_piri_small_hot",
+      "name": "Piri-piri / дребен лют тип",
+      "crop": "pepper",
+      "section": "pepper-hot",
+      "latin": "Capsicum annuum/frutescens small hot pepper type",
+      "status": "small hot pepper type",
+      "retailFacts": ["дребен силно лют тип", "много плодове", "подходящ за саксия и сушене", "по-топлолюбив"],
+      "scores": {"disease_resistance": 6, "fungal_resistance": 6, "virus_resistance": 5, "drought_tolerance": 7, "heat_tolerance": 9, "cold_tolerance": 3, "low_soil_fertility_tolerance": 6, "sun_need_efficiency": 7, "root_power": 6, "root_size": 5, "plant_vigor": 8, "yield_per_plant": 7, "yield_per_square_meter": 7, "fruit_size": 2, "fruit_count": 10, "harvest_ease": 5, "edible_value": 6, "vitamin_c": 10, "minerals": 8, "antioxidants": 9, "flavor": 7, "market_value": 7, "availability": 6, "phytonutrient_profile": 9, "body_benefit_per_100g": 9, "container_resilience": 9, "compact_space_efficiency": 9, "maintenance_ease": 8, "capsaicin_heat": 10},
+      "raw": {"fruit_shape": "tiny hot", "pungency": "very hot", "source_quality": "general hot pepper type knowledge, evidence 2/5"}
+    }
+  ]
+}
